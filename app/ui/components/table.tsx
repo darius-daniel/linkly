@@ -1,6 +1,5 @@
 import { sfProDisplayBold } from '../fonts';
 import Row from './row';
-import { Link } from '@prisma/client';
 
 export default function Table() {
   return (

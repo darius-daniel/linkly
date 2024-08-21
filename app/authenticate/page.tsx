@@ -22,7 +22,7 @@ export default function Example() {
         <form
           action={async (formData) => {
             'use server';
-            await signIn('resend', { redirectTo: '/' });
+            await signIn('resend', { redirectTo: '/', ...formData });
           }}
           className="space-y-6"
         >

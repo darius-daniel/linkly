@@ -1,13 +1,8 @@
 import { ArrowRight, Link } from 'lucide-react';
 
 export default function LinkInput() {
-  const createShortLink = async (formData: FormData) => {
-    'use server';
-    // const { originalLink } = { originalLink: formData.get('originalLink') };
-  };
-
   return (
-    <form action={createShortLink} className="flex flex-row w-full relative">
+    <form action="" className="flex flex-row w-full relative">
       <Link className="absolute left-6 top-6" />
       <input
         type="text"
