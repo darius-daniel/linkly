@@ -1,4 +1,4 @@
-import { Link, User } from '@prisma/client';
+import { Link } from '@prisma/client';
 
 export interface TableProps {
   data?: Array<Link>;

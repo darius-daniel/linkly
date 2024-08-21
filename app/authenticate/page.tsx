@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { signIn } from '@/auth';
 
 export default function Example() {
@@ -6,7 +7,7 @@ export default function Example() {
     <div className="flex min-h-screen text-custom-lite flex-1 flex-col justify-center px-6 py-12 min-w-80">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <Link href="/">
-          <img
+          <Image
             alt="Your Company"
             src="../../linkly_main.svg"
             className="mx-auto h-10 w-auto"

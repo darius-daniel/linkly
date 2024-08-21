@@ -3,7 +3,7 @@ import { ArrowRight, Link } from 'lucide-react';
 export default function LinkInput() {
   const createShortLink = async (formData: FormData) => {
     'use server';
-    const { originalLink } = { originalLink: formData.get('originalLink') };
+    // const { originalLink } = { originalLink: formData.get('originalLink') };
   };
 
   return (

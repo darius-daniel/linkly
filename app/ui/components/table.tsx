@@ -1,10 +1,8 @@
-import { ChevronDown, Copy } from 'lucide-react';
 import { sfProDisplayBold } from '../fonts';
-import { TableProps } from '@/app/lib/definitions';
 import Row from './row';
 import { Link } from '@prisma/client';
 
-export default function Table({ data }: { data: Array<Link> }) {
+export default function Table() {
   return (
     <table className="lg:w-4/5 lg:mx-auto flex flex-col divide-y-4 divide-custom-black gap text-sm text-custom-lite">
       <thead

@@ -1,4 +1,3 @@
-import { RowProps } from '@/app/lib/definitions';
 import { Link } from '@prisma/client';
 import { ChevronDown, Copy } from 'lucide-react';
 import Image from 'next/image';

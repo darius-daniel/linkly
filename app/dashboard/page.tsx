@@ -1,5 +1,5 @@
 'use client';
 
-export default function Page({ params }: { params: { slug: string } }) {
+export default function Page() {
   return <></>;
 }
