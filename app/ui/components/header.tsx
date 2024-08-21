@@ -9,29 +9,19 @@ export default function Header() {
 
   return (
     <header
-      className={`${sfProDisplayHeavy.className} flex flex-row justify-between items-center pt-6 text-4xl`}
+      className={`${sfProDisplayHeavy.className} flex flex-row justify-between items-center pt-6 text-4xl sm:w-11/12 sm:mx-auto`}
     >
       <span className="bg-gradient-to-r from-custom-pink via-custom-purple via-65% to-custom-blue to-80% bg-clip-text text-transparent">
         Linkly
       </span>
-      <div className="flex flex-row gap-5">
-        <button
-          className={`${sfProDisplaySemiBold.className} text-xl bg-custom-dark-gray px-6 py-3 rounded-full border border-custom-gray hover:bg-custom-gray`}
-          onClick={() => router.push('/api/auth/signup')}
-        >
-          <span className="flex flex-row gap-2 items-center">
-            Login <LogIn />
-          </span>
-        </button>
-        <button
-          className={`${sfProDisplaySemiBold.className} text-xl bg-custom-blue px-6 py-3 rounded-full border border-custom-gray hover:shadow-xl hover:shadow-custom-blue max-md:hidden`}
-          onClick={() => router.push('/api/auth/login')}
-        >
-          <span className="flex flex-row gap-2 items-center">
-            Register Now!
-          </span>
-        </button>
-      </div>
+      <button
+        className={`${sfProDisplaySemiBold.className} text-xl bg-custom-dark-gray-transparent px-6 pt-2 pb-3 rounded-full border border-custom-gray hover:bg-custom-gray`}
+        onClick={() => router.push('/authenticate')}
+      >
+        <span className="flex flex-row gap-2 items-center">
+          Login <LogIn />
+        </span>
+      </button>
     </header>
   );
 }

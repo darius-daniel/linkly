@@ -1,8 +1,7 @@
 {
-    "editor.fontFamily": "RecMonoCasual Nerd Font, Recursive",
+    "editor.fontFamily": "Recursive",
     "editor.fontLigatures": true,
-    "editor.fontWeight": 600,
+    "editor.fontWeight": 500,
     "editor.fontSize": 13,
     "terminal.integrated.fontSize": 13,
-    "terminal.integrated.letterSpacing": 1,
 }

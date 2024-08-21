@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import { UserProvider } from '@auth0/nextjs-auth0/client';
 import './globals.css';
 import { sfProDisplayRegular } from './ui/fonts';
 
@@ -15,9 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <UserProvider>
-        <body className={sfProDisplayRegular.className}>{children}</body>
-      </UserProvider>
+      <body className={sfProDisplayRegular.className}>{children}</body>
     </html>
   );
 }
