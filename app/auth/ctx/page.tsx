@@ -1,16 +1,25 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
-import { signIn } from '@/auth';
+import { useFormState } from 'react-dom';
+import { getUser } from '@/app/lib/actions';
 
 export default function Example() {
+  const initialState = {
+    message: '',
+  };
+  const [state, formAction] = useFormState(getUser, initialState);
   return (
-    <div className="flex min-h-screen text-custom-lite flex-1 flex-col justify-center px-6 py-12 min-w-80">
-      <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+    <div className="flex min-h-screen text-custom-lite flex-1 flex-col border px-6 py-12 min-w-80">
+      <div className="mt-24 sm:mx-auto sm:w-full sm:max-w-sm">
         <Link href="/">
           <Image
             alt="Your Company"
             src="../../linkly_main.svg"
-            className="mx-auto h-10 w-auto"
+            className="mx-auto"
+            width={116.75}
+            height={40}
           />
         </Link>
         <h2 className="mt-2 text-center text-2xl font-bold leading-9 tracking-tight">
@@ -19,13 +28,7 @@ export default function Example() {
       </div>
 
       <div className="mt-5 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form
-          action={async (formData) => {
-            'use server';
-            await signIn('resend', { redirectTo: '/', ...formData });
-          }}
-          className="space-y-6"
-        >
+        <form action={formAction} className="space-y-6">
           <div>
             <label
               htmlFor="email"
@@ -55,6 +58,13 @@ export default function Example() {
           </div>
         </form>
       </div>
+      {state?.message && (
+        <div className="toast toast-top toast-end">
+          <div className="alert alert-error">
+            <span>{state?.message}</span>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
