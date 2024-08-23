@@ -11,7 +11,7 @@ export default function Example() {
   };
   const [state, formAction] = useFormState(getUser, initialState);
   return (
-    <div className="flex min-h-screen text-custom-lite flex-1 flex-col border px-6 py-12 min-w-80">
+    <div className="flex min-h-screen text-custom-lite flex-1 flex-col px-6 py-12 min-w-80">
       <div className="mt-24 sm:mx-auto sm:w-full sm:max-w-sm">
         <Link href="/">
           <Image

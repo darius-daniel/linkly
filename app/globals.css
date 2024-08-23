@@ -15,7 +15,7 @@
   }
 }
 
-body {
+body, .kinde {
   color: rgb(var(--foreground-rgb));
   background-color: rgb(var(--background-rgb));
   background-image: url('../public/cubes.svg');

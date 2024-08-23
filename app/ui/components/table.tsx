@@ -28,6 +28,39 @@ export default function Table() {
             id: '1',
           }}
         />
+        <Row
+          data={{
+            shortLink: 'https://linkly.com/Bn41...',
+            originalLink: 'https://www.twitter.com/tweets/8erelCoihu/',
+            clicks: 1,
+            status: true,
+            created_at: new Date(),
+            creatorId: '1',
+            id: '1',
+          }}
+        />
+        <Row
+          data={{
+            shortLink: 'https://linkly.com/Bn41...',
+            originalLink: 'https://www.twitter.com/tweets/8erelCoihu/',
+            clicks: 1,
+            status: true,
+            created_at: new Date(),
+            creatorId: '1',
+            id: '1',
+          }}
+        />
+        <Row
+          data={{
+            shortLink: 'https://linkly.com/Bn41...',
+            originalLink: 'https://www.twitter.com/tweets/8erelCoihu/',
+            clicks: 1,
+            status: true,
+            created_at: new Date(),
+            creatorId: '1',
+            id: '1',
+          }}
+        />
       </tbody>
     </table>
   );
