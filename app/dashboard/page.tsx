@@ -13,7 +13,7 @@ export default function Page() {
 
   useEffect(() => {
     if (!isLoading && user) console.log(user);
-  }, [isLoading]);
+  }, [isLoading, user]);
 
   return (
     <div className="min-h-screen pb-28">
