@@ -1,9 +1,5 @@
 // import Image from 'next/image';
-import {
-  sfProDisplayBold,
-  sfProDisplayHeavy,
-  sfProDisplayRegular,
-} from './ui/fonts';
+import { sfProDisplayBold, sfProDisplayHeavy } from './ui/fonts';
 import Table from './ui/components/table';
 import Header from './ui/components/header';
 import LinkInput from './ui/components/link-input';
@@ -11,7 +7,7 @@ import Link from 'next/link';
 
 export default function Home() {
   return (
-    <main className={`${sfProDisplayRegular.className} px-5 pb-20 min-w-80`}>
+    <main className="px-5 pb-20 min-w-80">
       <Header />
       <section className="pt-20 flex flex-col gap-5 lg:w-3/5 lg:mx-auto">
         <div className="w-4/5 mx-auto">
@@ -27,16 +23,10 @@ export default function Home() {
         </div>
         <LinkInput />
         <div className="w-4/5 mx-auto text-center text-custom-lite text-sm leading-5">
-          <p>
-            You can create{' '}
-            <span className={`${sfProDisplayBold.className} text-custom-pink`}>
-              05
-            </span>{' '}
-            more links.{' '}
-            <a
-              href="/sign-up"
-              className={`${sfProDisplayBold.className} underline`}
-            >
+          <p className={`${sfProDisplayBold.className}`}>
+            You can create <span className="text-custom-pink">05</span> more
+            links.{' '}
+            <a href="/sign-up" className="underline">
               Register Now
             </a>{' '}
             to enjoy Unlimited usage
@@ -46,7 +36,10 @@ export default function Home() {
       <section className="relative mt-16 text-custom-lite text-center">
         <Table />
         <p className="backdrop-blur-sm absolute top-12 left-0 w-full py-6 text-sm">
-          <Link href="/auth/sign-up" className="underline text-custom-blue">
+          <Link
+            href="/api/auth/register"
+            className="underline text-custom-blue"
+          >
             Register now
           </Link>{' '}
           to enjoy unlimited history

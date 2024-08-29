@@ -1,32 +1,55 @@
 'use server';
 
-import { redirect } from 'next/navigation';
 import prisma from './prisma';
-import { schema } from './zod';
+import { linkSchema } from './zod';
+import { generateRandomString } from './utils';
 import { User } from '@prisma/client';
+import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server';
 
-type State = { message: string };
+export async function createUser(user: User) {
+  const dbUser = await prisma.user.findFirst({ where: { kinde_id: user.id } });
+  const newUser = { ...user, kinde_id: user.id };
 
-export async function saveUser(user: User) {
-  if (!(await prisma.user.findFirst({ where: { email: user.email } }))) {
-    await prisma.user.create({ data: user });
+  if (!dbUser) {
+    return await prisma.user.create({ data: { ...newUser } });
   }
+
+  return dbUser;
 }
 
-export async function getUser(prevState: State, formData: FormData) {
-  const validatedFields = schema.safeParse({
-    email: formData.get('email'),
+export type State =
+  | { errors: { url?: string[] | undefined }; message?: undefined }
+  | { message: string; errors?: undefined }
+  | undefined;
+
+export async function createShortLink(prevState: State, formData: FormData) {
+  const validatedFields = linkSchema.safeParse(formData);
+
+  if (!validatedFields.success)
+    return { errors: validatedFields.error.flatten().fieldErrors };
+
+  const { getUser } = getKindeServerSession();
+  const kindeUser = await getUser();
+
+  const user = await prisma.user.findFirst({
+    where: { kinde_id: kindeUser?.id },
   });
 
-  if (!validatedFields.success) {
-    return {
-      message: 'Please enter a valid email address',
+  if (user) {
+    const data = {
+      original_link: validatedFields.data.url,
+      short_link: generateRandomString(),
+      status: true,
+      clicks: 0,
+      creator_id: user?.id,
     };
+    try {
+      await prisma.link.create({ data });
+      return { message: 'Success!' };
+    } catch (error) {
+      return { message: 'Failed' };
+    }
   }
-
-  const { email } = validatedFields.data;
-  const user = await prisma.user.findFirst({ where: { email } });
-  if (!user) redirect('/ctx/register/');
-
-  redirect('/ctx/login/');
 }
+
+export async function deleteShortLink(formData: FormData) {}
