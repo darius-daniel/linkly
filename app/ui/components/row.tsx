@@ -3,13 +3,13 @@ import { ChevronDown, Copy } from 'lucide-react';
 import Image from 'next/image';
 
 export default function Row({ data }: { data: Link }) {
-  const domain = new URL(data.originalLink).hostname;
+  const domain = new URL(data.original_link).hostname;
   return (
     <tr className="flex flex-row items-center justify-between">
       <td className="flex flex-row justify-between items-center p-2 w-full lg:w-1/4">
         <span className="flex flex-row gap-1 items-center">
           <a href="https://www.twitter.com/tweets/8erelCoihu/" target="_blank">
-            {data.shortLink.slice(0, 23)}...
+            {data.short_link.slice(0, 36)}...
           </a>
           <Copy
             size={30}
@@ -23,7 +23,7 @@ export default function Row({ data }: { data: Link }) {
       </td>
       <td className="max-lg:hidden w-1/4">
         <a
-          href={data.originalLink}
+          href={data.original_link}
           className="flex flex-row gap-3 items-center"
         >
           <Image
@@ -32,10 +32,10 @@ export default function Row({ data }: { data: Link }) {
             width={32}
             height={32}
           />
-          {data.originalLink.slice(0, 28)}...
+          {data.original_link.slice(0, 24)}...
         </a>
       </td>
-      <td className="max-lg:hidden w-1/6">{data.clicks}</td>
+      <td className="max-lg:hidden w-1/6 ps-1">{data.clicks}</td>
       <td className="max-lg:hidden w-1/6">
         {data.status ? 'Active' : 'Inactive'}
       </td>

@@ -6,6 +6,10 @@ export const schema = z.object({
   }),
 });
 
+export const linkSchema = z.object({
+  url: z.string().url({ message: 'Enter a valid URL' }),
+});
+
 // export const signInSchema = z.object({
 //   email: z.string().toLowerCase().trim().email(),
 //   password: z.string().min(6),
