@@ -21,8 +21,8 @@ export default function Table() {
       <tbody className="flex flex-col divide-y-4 divide-custom-black bg-custom-dark-gray-transparent px-2">
         <Row
           data={{
-            shortLink: 'https://linkly.com/Bn41...',
-            originalLink: 'https://www.twitter.com/tweets/8erelCoihu/',
+            short_link: 'https://linkly.com/Bn41...',
+            original_link: 'https://www.twitter.com/tweets/8erelCoihu/',
             clicks: 1,
             status: true,
             created_at: new Date(),
@@ -33,8 +33,8 @@ export default function Table() {
         />
         <Row
           data={{
-            shortLink: 'https://linkly.com/Bn41...',
-            originalLink: 'https://www.twitter.com/tweets/8erelCoihu/',
+            short_link: 'https://linkly.com/Bn41...',
+            original_link: 'https://www.twitter.com/tweets/8erelCoihu/',
             clicks: 101,
             status: true,
             created_at: new Date(),
@@ -45,8 +45,8 @@ export default function Table() {
         />
         <Row
           data={{
-            shortLink: 'https://linkly.com/Bn41...',
-            originalLink: 'https://www.twitter.com/tweets/8erelCoihu/',
+            short_link: 'https://linkly.com/Bn41...',
+            original_link: 'https://www.twitter.com/tweets/8erelCoihu/',
             clicks: 47,
             status: true,
             created_at: new Date(),
@@ -57,8 +57,8 @@ export default function Table() {
         />
         <Row
           data={{
-            shortLink: 'https://linkly.com/Bn41...',
-            originalLink: 'https://www.twitter.com/tweets/8erelCoihu/',
+            short_link: 'https://linkly.com/Bn41...',
+            original_link: 'https://www.twitter.com/tweets/8erelCoihu/',
             clicks: 1998,
             status: true,
             created_at: new Date(),

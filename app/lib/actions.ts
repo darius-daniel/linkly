@@ -7,7 +7,7 @@ import { User } from '@prisma/client';
 import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server';
 
 export async function createUser(user: User) {
-  const dbUser = await prisma.user.findFirst({ where: { kindeId: user.id } });
+  const dbUser = await prisma.user.findFirst({ where: { kinde_id: user.id } });
   const newUser = { ...user, kindeId: user.id };
 
   if (!dbUser) {
@@ -32,16 +32,16 @@ export async function createShortLink(prevState: State, formData: FormData) {
   const kindeUser = await getUser();
 
   const user = await prisma.user.findFirst({
-    where: { kindeId: kindeUser?.id },
+    where: { kinde_id: kindeUser?.id },
   });
 
   if (user) {
     const data = {
-      originalLink: validatedFields.data.url,
-      shortLink: generateRandomString(),
+      original_link: validatedFields.data.url,
+      short_link: generateRandomString(),
       status: true,
       clicks: 0,
-      creatorId: user?.id,
+      creator_id: user.id,
     };
     try {
       await prisma.link.create({ data });
