@@ -4,10 +4,10 @@ import { redirect } from 'next/navigation';
 export async function GET(request: Request) {
   const pathname = request.url.split('/')[3];
   const url = await prisma.link.findFirst({
-    where: { short_link: pathname },
+    where: { shortLink: pathname },
   });
 
-  if (url) redirect(url.original_link);
+  if (url) redirect(url.originalLink);
 
   redirect('/');
 }
