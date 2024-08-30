@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { sfProDisplayBold } from '../fonts';
 import Row from './row';
@@ -26,6 +26,7 @@ export default function Table() {
             clicks: 1,
             status: true,
             created_at: new Date(),
+            updated_at: new Date(),
             creator_id: '1',
             id: '1',
           }}
@@ -37,6 +38,7 @@ export default function Table() {
             clicks: 101,
             status: true,
             created_at: new Date(),
+            updated_at: new Date(),
             creator_id: '1',
             id: '1',
           }}
@@ -49,6 +51,7 @@ export default function Table() {
             status: true,
             created_at: new Date(),
             creator_id: '1',
+            updated_at: new Date(),
             id: '1',
           }}
         />
@@ -59,6 +62,7 @@ export default function Table() {
             clicks: 1998,
             status: true,
             created_at: new Date(),
+            updated_at: new Date(),
             creator_id: '1',
             id: '1',
           }}
