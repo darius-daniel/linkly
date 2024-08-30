@@ -4,8 +4,6 @@ import { createShortLink } from '@/app/lib/actions';
 import { ArrowRight, Link } from 'lucide-react';
 import { useFormState } from 'react-dom';
 import { useEffect, useState } from 'react';
-import SuccessToast from './toasts/success';
-import ErrorToast from './toasts/error';
 import InfoToast from './toasts/info';
 
 export default function LinkInput() {
