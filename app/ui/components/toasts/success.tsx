@@ -4,10 +4,8 @@ import { useState } from 'react';
 export default function SuccessToast({ message }: { message: string }) {
   const [showing, setShowing] = useState(true);
   return (
-    <div
-      className={showing ? 'toast toast-center' : 'toast toast-center hidden'}
-    >
-      <div className="alert alert-success bg-transparent text-success">
+    <div className={showing ? 'toast toast-center max-sm:min-w-60' : 'hidden'}>
+      <div className="alert alert-success bg-transparent text-success flex flex-row justify-center">
         <CircleCheckBig />
         <span>{message}</span>
         <X

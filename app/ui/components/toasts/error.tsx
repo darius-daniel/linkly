@@ -4,10 +4,8 @@ import { useState } from 'react';
 export default function ErrorToast({ message }: { message: string }) {
   const [showing, setShowing] = useState(true);
   return (
-    <div
-      className={showing ? 'toast toast-center' : 'toast toast-center hidden'}
-    >
-      <div className="alert alert-error bg-transparent text-error">
+    <div className={showing ? 'toast toast-center max-sm:min-w-60' : 'hidden'}>
+      <div className="alert alert-error bg-transparent text-error flex flex-row justify-center">
         <ShieldAlert />
         <span>{message}</span>
         <X

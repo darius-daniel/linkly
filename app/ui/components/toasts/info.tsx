@@ -4,10 +4,8 @@ import { useState } from 'react';
 export default function InfoToast({ message }: { message: string }) {
   const [showing, setShowing] = useState(true);
   return (
-    <div
-      className={showing ? 'toast toast-center' : 'toast toast-center hidden'}
-    >
-      <div className="alert alert-info bg-transparent text-custom-blue">
+    <div className={showing ? 'toast toast-center max-sm:min-w-60' : 'hidden'}>
+      <div className="alert alert-info bg-transparent text-custom-blue flex flex-row justify-center">
         <Info />
         <span>{message}</span>
         <X

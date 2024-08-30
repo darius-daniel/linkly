@@ -3,8 +3,10 @@
 import { createShortLink } from '@/app/lib/actions';
 import { ArrowRight, Link } from 'lucide-react';
 import { useFormState } from 'react-dom';
-import WarningToast from './toasts/warning';
 import { useEffect, useState } from 'react';
+import SuccessToast from './toasts/success';
+import ErrorToast from './toasts/error';
+import InfoToast from './toasts/info';
 
 export default function LinkInput() {
   const initialState = {
@@ -35,13 +37,13 @@ export default function LinkInput() {
       />
       <button
         type="submit"
-        className="absolute right-2 top-2 bg-custom-blue rounded-full p-4 hover:shadow-custom-blue hover:shadow-2xl"
+        className="absolute right-2 top-2 bg-indigo-800 rounded-full p-4 hover:bg-indigo-700"
       >
         <ArrowRight className="sm:hidden" />
         <span className="max-sm:hidden">Shorten Now!</span>
       </button>
       {showToast && (
-        <WarningToast
+        <InfoToast
           message={state?.message ? state?.message : 'Testing the toast'}
         />
       )}
