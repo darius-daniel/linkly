@@ -25,9 +25,9 @@ export default function Table() {
             originalLink: 'https://www.twitter.com/tweets/8erelCoihu/',
             clicks: 1,
             status: true,
-            createdAt: new Date(),
-            updatedAt: new Date(),
-            creatorId: '1',
+            created_at: new Date(),
+            updated_at: new Date(),
+            creator_id: '1',
             id: '1',
           }}
         />
@@ -37,9 +37,9 @@ export default function Table() {
             originalLink: 'https://www.twitter.com/tweets/8erelCoihu/',
             clicks: 101,
             status: true,
-            createdAt: new Date(),
-            updatedAt: new Date(),
-            creatorId: '1',
+            created_at: new Date(),
+            updated_at: new Date(),
+            creator_id: '1',
             id: '1',
           }}
         />
@@ -49,9 +49,9 @@ export default function Table() {
             originalLink: 'https://www.twitter.com/tweets/8erelCoihu/',
             clicks: 47,
             status: true,
-            createdAt: new Date(),
-            creatorId: '1',
-            updatedAt: new Date(),
+            created_at: new Date(),
+            creator_id: '1',
+            updated_at: new Date(),
             id: '1',
           }}
         />
@@ -61,9 +61,9 @@ export default function Table() {
             originalLink: 'https://www.twitter.com/tweets/8erelCoihu/',
             clicks: 1998,
             status: true,
-            createdAt: new Date(),
-            updatedAt: new Date(),
-            creatorId: '1',
+            created_at: new Date(),
+            updated_at: new Date(),
+            creator_id: '1',
             id: '1',
           }}
         />

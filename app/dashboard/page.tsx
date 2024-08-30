@@ -24,6 +24,8 @@ export default function Page() {
         const newUser = await createUser({
           ...authUser,
           kinde_id: authUser.id,
+          created_at: new Date(),
+          updated_at: new Date(),
         });
         setUser(newUser);
       };
