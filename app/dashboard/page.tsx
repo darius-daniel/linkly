@@ -13,26 +13,22 @@ import {
 import LinkInput from '@/app/ui/components/link-input';
 import Table from '@/app/ui/components/table';
 import { createUser } from '../lib/actions';
+import { User } from '@prisma/client';
 
 export default function Page() {
-  const { isLoading, user: authUser } = useKindeBrowserClient();
-  const [user, setUser] = useState(authUser);
+  const { isLoading } = useKindeBrowserClient();
+  const [user, setUser] = useState<User | undefined>();
 
   useEffect(() => {
-    if (!isLoading && authUser) {
+    if (!isLoading) {
       const saveUser = async () => {
-        const newUser = await createUser({
-          ...authUser,
-          kinde_id: authUser.id,
-          created_at: new Date(),
-          updated_at: new Date(),
-        });
+        const newUser = await createUser();
         setUser(newUser);
       };
 
       saveUser();
     }
-  }, [isLoading, authUser]);
+  }, [isLoading]);
 
   return (
     <div className="min-h-screen pb-28">
@@ -47,15 +43,23 @@ export default function Page() {
         >
           <LinkInput />
         </div>
-        <details className="dropdown dropdown-end ms-3">
+        <details
+          className={
+            isLoading ? 'skeleton w-36 h-12 ms-3' : 'dropdown dropdown-end ms-3'
+          }
+        >
           <summary className="btn bg-transparent hover:bg-custom-dark-gray hover:text-white size-fit border-0 py-1.5 mx-auto">
-            <Image
-              src="../../avatars/kidaha-12.svg"
-              width={32}
-              height={32}
-              alt="avatar"
-            />{' '}
-            {user?.given_name ? user.given_name : 'John Doe'}
+            {!isLoading && (
+              <Image
+                src={
+                  user?.picture ? user.picture : '../../avatars/kidaha-12.svg'
+                }
+                width={32}
+                height={32}
+                alt="avatar"
+              />
+            )}{' '}
+            {user?.given_name && user.given_name + ' ' + user.family_name}
           </summary>
           <ul
             className={`${sfProDisplaySemiBold.className} menu dropdown-content bg-transparent rounded-box z-[1] p-2 shadow`}

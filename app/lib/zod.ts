@@ -7,7 +7,11 @@ export const schema = z.object({
 });
 
 export const linkSchema = z.object({
-  url: z.string().url({ message: 'Enter a valid URL' }),
+  url: z
+    .string({
+      required_error: 'Field cannot be empty',
+    })
+    .url({ message: 'Enter a valid URL' }),
 });
 
 // export const signInSchema = z.object({

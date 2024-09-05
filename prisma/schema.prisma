@@ -14,29 +14,40 @@ datasource db {
 }
 
 model User {
-  id         String  @id @default(cuid())
-  kinde_id    String
-  family_name String?
-  given_name  String?
-  email      String? @unique
-  picture    String?
+  id                   String  @id @default(cuid())
+  family_name          String?
+  given_name           String?
+  phone_number         String?
+  username             String?
+  email                String? @unique
+  picture              String?
 
-  links      Link[]
+  usr_city             String?
+  usr_industry         String?
+  usr_job_title        String?
+  usr_middle_name      String?
+  usr_postcode         String?
+  usr_salutation       String?
+  usr_state_region     String?
+  usr_street_address   String?
+  usr_street_address_2 String?
 
-  created_at  DateTime @default(now())
-  updated_at  DateTime @updatedAt
+  links                Link[]
+
+  created_at           DateTime? @default(now())
+  updated_at           DateTime? @updatedAt
 }
 
 model Link {
-  id           String   @id @default(cuid())
+  id            String   @id @default(cuid())
   short_link    String   @unique
   original_link String
-  clicks       Int
-  status       Boolean  @default(true)
+  clicks        Int
+  status        Boolean  @default(true)
 
-  creator      User     @relation(fields: [creator_id], references: [id], onDelete: Cascade)
+  creator       User     @relation(fields: [creator_id], references: [id], onDelete: Cascade)
   creator_id    String
 
-  created_at    DateTime @default(now())
-  updated_at    DateTime @updatedAt
+  created_at    DateTime? @default(now())
+  updated_at    DateTime? @updatedAt
 }
