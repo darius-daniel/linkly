@@ -7,6 +7,12 @@ const nextConfig = {
         hostname: 'icons.duckduckgo.com',
         pathname: '/ip3/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'lh3.googleusercontent.com',
+        port: '',
+        pathname: '/a/**',
+      },
     ],
   },
   // async redirects() {
