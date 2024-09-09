@@ -4,8 +4,8 @@ import { createShortLink } from '@/app/lib/actions';
 import { ArrowRight, Link } from 'lucide-react';
 import { useFormState } from 'react-dom';
 import { useEffect, useState } from 'react';
-import ErrorToast from './toasts/error';
 import Dots from './loaders/dots';
+import ErrorToast from './toasts/error';
 
 export default function LinkInput() {
   const initialState = {
@@ -47,6 +47,9 @@ export default function LinkInput() {
           </>
         )}
       </button>
+      {state?.errors?.url[0] && showToast && (
+        <ErrorToast message={state.errors.url[0]} />
+      )}
     </form>
   );
 }

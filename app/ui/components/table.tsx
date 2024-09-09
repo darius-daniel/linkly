@@ -6,6 +6,7 @@ import Row from './row';
 import { getLinks } from '@/app/lib/actions';
 import { useKindeBrowserClient } from '@kinde-oss/kinde-auth-nextjs';
 import { Link } from '@prisma/client';
+import Pagination from './pagination';
 
 export default function Table() {
   const { user } = useKindeBrowserClient();
@@ -20,7 +21,7 @@ export default function Table() {
         setRows(rows);
       }
     };
-  }, [currentPage]);
+  }, [currentPage, user]);
   return (
     <>
       <table className="lg:w-4/5 lg:mx-auto flex flex-col divide-y-4 divide-custom-black gap text-sm text-custom-lite">
@@ -42,12 +43,7 @@ export default function Table() {
           ))}
         </tbody>
       </table>
-      <div className="join bg-custom-dark-gray justify-end">
-        <button className="join-item btn bg-inherit">1</button>
-        <button className="join-item btn btn-active">2</button>
-        <button className="join-item btn bg-inherit">3</button>
-        <button className="join-item btn bg-inherit">4</button>
-      </div>
+      <Pagination currentPage={{ value: currentPage, set: setCurrentPage }} />
     </>
   );
 }

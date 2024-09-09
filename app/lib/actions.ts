@@ -72,7 +72,7 @@ export async function createShortLink(prevState: State, formData: FormData) {
   }
 }
 
-export async function deleteShortLink(formData: FormData) {}
+// export async function deleteShortLink(formData: FormData) {}
 
 export async function getLinks(userId: string, currentPage: number) {
   const maxLinksPerPage = 10;

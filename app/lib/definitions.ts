@@ -9,4 +9,4 @@ export interface RowProps {
   data: Link;
 }
 
-export type Page = [number, Dispatch<SetStateAction<number>>];
+export type Page = { value: number; set: Dispatch<SetStateAction<number>> };

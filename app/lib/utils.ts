@@ -9,3 +9,11 @@ export function generateRandomString(length = 8) {
   }
   return result;
 }
+
+export function createArrayFromRange(start: number, stop: number) {
+  const step = 1;
+  return Array.from(
+    { length: (stop - start) / step + 1 },
+    (value, index) => start + index * step,
+  );
+}
