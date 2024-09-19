@@ -3,27 +3,14 @@
 import { createShortLink } from '@/app/lib/actions';
 import { ArrowRight, Link } from 'lucide-react';
 import { useFormState } from 'react-dom';
-import WarningToast from './toasts/warning';
 import { useEffect, useState } from 'react';
-import ErrorToast from './toasts/error';
 import Dots from './loaders/dots';
 
 export default function LinkInput() {
   const initialState = {
-    // errors: {},
     message: '',
   };
-  const [state, formAction, pending] = useFormState(
-    createShortLink,
-    initialState,
-  );
-  const [showToast, setShowToast] = useState(true);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setShowToast(false);
-    }, 2 * 1000);
-  }, [pending]);
+  const [state, formAction] = useFormState(createShortLink, initialState);
 
   return (
     <form action={formAction} className="flex flex-row w-full relative">
@@ -39,14 +26,8 @@ export default function LinkInput() {
         type="submit"
         className="absolute right-2 top-2 bg-custom-blue rounded-full p-4 hover:shadow-custom-blue hover:shadow-2xl"
       >
-        {pending ? (
-          <Dots />
-        ) : (
-          <>
-            <ArrowRight className="sm:hidden" />
-            <span className="max-sm:hidden">Shorten Now!</span>
-          </>
-        )}
+        <ArrowRight className="sm:hidden" />
+        <span className="max-sm:hidden">Shorten Now!</span>
       </button>
     </form>
   );

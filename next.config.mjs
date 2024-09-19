@@ -13,6 +13,12 @@ const nextConfig = {
         port: '',
         pathname: '/a/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'gravatar.com',
+        port: '',
+        pathname: '/avatar/**',
+      },
     ],
   },
   // async redirects() {

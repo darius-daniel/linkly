@@ -16,11 +16,11 @@ import { createUser } from '../lib/actions';
 import { User } from '@prisma/client';
 
 export default function Page() {
-  const { isLoading } = useKindeBrowserClient();
+  const { isLoading, isAuthenticated } = useKindeBrowserClient();
   const [user, setUser] = useState<User | undefined>();
 
   useEffect(() => {
-    if (!isLoading) {
+    if (!isLoading && isAuthenticated) {
       const saveUser = async () => {
         const newUser = await createUser();
         setUser(newUser);

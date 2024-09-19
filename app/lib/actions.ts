@@ -8,7 +8,9 @@ import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server';
 export async function createUser() {
   const { getUser } = getKindeServerSession();
   const kindeUser = await getUser();
-  const dbUser = await prisma.user.findFirst({ where: { id: kindeUser?.id } });
+  const dbUser = await prisma.user.findFirst({
+    where: { email: kindeUser?.email },
+  });
 
   if (!dbUser) {
     const properties = kindeUser?.properties;
@@ -31,7 +33,7 @@ export type State =
   | undefined;
 
 export async function createShortLink(prevState: State, formData: FormData) {
-  console.log(formData);
+  console.log(formData.get('url'));
   // const validatedFields = linkSchema.safeParse(formData);
 
   // if (!validatedFields.success)
@@ -77,8 +79,19 @@ export async function deleteShortLink(formData: FormData) {}
 export async function getLinks(userId: string, currentPage: number) {
   const maxLinksPerPage = 10;
   return await prisma.link.findMany({
-    where: { id: userId },
+    where: { creator_id: userId },
     skip: (currentPage - 1) * maxLinksPerPage,
     take: maxLinksPerPage,
   });
+}
+
+export async function getShortLinkLastPageNum(
+  userId: string,
+  maxLinksPerPage: number,
+) {
+  const linkTotal = await prisma.link.count({
+    where: { creator_id: userId },
+  });
+
+  return Math.ceil(linkTotal / maxLinksPerPage);
 }
