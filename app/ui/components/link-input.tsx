@@ -3,26 +3,13 @@
 import { createShortLink } from '@/app/lib/actions';
 import { ArrowRight, Link } from 'lucide-react';
 import { useFormState } from 'react-dom';
-import { useEffect, useState } from 'react';
-import Dots from './loaders/dots';
 import ErrorToast from './toasts/error';
 
 export default function LinkInput() {
   const initialState = {
-    // errors: {},
     message: '',
   };
-  const [state, formAction, pending] = useFormState(
-    createShortLink,
-    initialState,
-  );
-  const [showToast, setShowToast] = useState(true);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setShowToast(false);
-    }, 2 * 1000);
-  }, [pending]);
+  const [state, formAction] = useFormState(createShortLink, initialState);
 
   return (
     <form action={formAction} className="flex flex-row w-full relative">
@@ -38,18 +25,10 @@ export default function LinkInput() {
         type="submit"
         className="absolute right-2 top-2 bg-indigo-800 rounded-full p-4 hover:bg-indigo-700"
       >
-        {pending ? (
-          <Dots />
-        ) : (
-          <>
-            <ArrowRight className="sm:hidden" />
-            <span className="max-sm:hidden">Shorten Now!</span>
-          </>
-        )}
+        <ArrowRight className="sm:hidden" />
+        <span className="max-sm:hidden">Shorten Now!</span>
       </button>
-      {state?.errors?.url[0] && showToast && (
-        <ErrorToast message={state.errors.url[0]} />
-      )}
+      {state?.errors && <ErrorToast message={state.errors.url[0]} />}
     </form>
   );
 }
