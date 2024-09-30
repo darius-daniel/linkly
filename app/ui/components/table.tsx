@@ -20,7 +20,7 @@ export default function Table() {
         setRows(rows);
       });
     }
-  }, [currentPage]);
+  }, [currentPage, user]);
 
   return (
     <>

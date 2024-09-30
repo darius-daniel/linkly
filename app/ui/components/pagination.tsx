@@ -1,5 +1,4 @@
 import { getShortLinkLastPageNum } from '@/app/lib/actions';
-import { User } from '@prisma/client';
 import { ChevronsLeft, ChevronsRight } from 'lucide-react';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
@@ -27,7 +26,7 @@ export default function Pagination({ currentPage, user }: PaginationProps) {
         setLastPageNum(lastPage);
       });
     }
-  }, [currentPage.value]);
+  }, [currentPage.value, user]);
 
   return (
     <div className="bg-transparent justify-center mt-1 text-center">
