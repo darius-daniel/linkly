@@ -1,29 +1,57 @@
-'use client';
+import { getShortLinkLastPageNum } from '@/app/lib/actions';
+import { User } from '@prisma/client';
+import { ChevronsLeft, ChevronsRight } from 'lucide-react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
-import { Page } from '@/app/lib/definitions';
-import { createArrayFromRange } from '@/app/lib/utils';
+interface PaginationProps {
+  user: {
+    id: string;
+    email: string | null;
+    family_name: string | null;
+    given_name: string | null;
+    picture: string | null;
+  } | null;
+  currentPage: {
+    value: number;
+    set: Dispatch<SetStateAction<number>>;
+  };
+}
 
-export default function Pagination({ currentPage }: { currentPage: Page }) {
-  let start;
-  let stop;
+export default function Pagination({ currentPage, user }: PaginationProps) {
+  const [lastPageNum, setLastPageNum] = useState<number | undefined>();
 
-  if (currentPage.value <= 4) {
-    start = 1;
-    stop = currentPage.value;
-  } else {
-    start = currentPage.value - 1;
-    stop = currentPage.value + 2;
-  }
-
-  const arrayOfPageNumbers = createArrayFromRange(start, stop);
-  console.log(arrayOfPageNumbers);
+  useEffect(() => {
+    if (user) {
+      getShortLinkLastPageNum(user.id, 10).then((lastPage) => {
+        console.log('Last page: ', lastPage);
+        setLastPageNum(lastPage);
+      });
+    }
+  }, [currentPage.value]);
 
   return (
-    <div className="join bg-custom-dark-gray justify-end">
-      <button className="join-item btn bg-inherit">1</button>
-      <button className="join-item btn btn-active">2</button>
-      <button className="join-item btn bg-inherit">3</button>
-      <button className="join-item btn bg-inherit">4</button>
+    <div className="bg-transparent justify-center mt-1 text-center">
+      <div className="join bg-custom-dark-gray size-fit">
+        <button
+          className="join-item btn btn-sm bg-inherit"
+          onClick={() => currentPage.set(currentPage.value - 1)}
+          disabled={currentPage.value - 1 < 1}
+        >
+          <ChevronsLeft size={16} />
+        </button>
+        <button className="join-item btn btn-sm btn-active">
+          {`Page ${currentPage.value}`}
+        </button>
+        <button
+          className="join-item btn btn-sm bg-inherit"
+          onClick={() => currentPage.set(currentPage.value + 1)}
+          disabled={
+            lastPageNum === undefined || currentPage.value + 1 > lastPageNum
+          }
+        >
+          <ChevronsRight size={16} />
+        </button>
+      </div>
     </div>
   );
 }
