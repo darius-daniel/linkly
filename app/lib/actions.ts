@@ -33,7 +33,7 @@ export type State =
   | undefined;
 
 export async function createShortLink(prevState: State, formData: FormData) {
-  console.log(formData.get('url'));
+  console.log(formData.get('url '));
   // const validatedFields = linkSchema.safeParse(formData);
 
   // if (!validatedFields.success)
