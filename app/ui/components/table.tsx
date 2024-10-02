@@ -16,7 +16,6 @@ export default function Table() {
   useEffect(() => {
     if (user) {
       getLinks(user.id, currentPage).then((rows) => {
-        console.log('Rows: ', rows);
         setRows(rows);
       });
     }
@@ -24,7 +23,7 @@ export default function Table() {
 
   return (
     <>
-      <table className="lg:w-4/5 lg:mx-auto flex flex-col divide-y-4 divide-custom-black gap text-sm text-custom-lite">
+      <table className="lg:w-4/5 lg:mx-auto flex flex-col divide-y-4 divide-custom-black gap text-xs text-custom-lite">
         <thead
           className={`${sfProDisplayBold.className} py-3 px-4 bg-custom-dark-gray rounded-t-2xl`}
         >

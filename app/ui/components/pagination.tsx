@@ -22,7 +22,6 @@ export default function Pagination({ currentPage, user }: PaginationProps) {
   useEffect(() => {
     if (user) {
       getShortLinkLastPageNum(user.id, 10).then((lastPage) => {
-        console.log('Last page: ', lastPage);
         setLastPageNum(lastPage);
       });
     }

@@ -1,7 +1,7 @@
 {
-    "editor.fontFamily": "Martian Mono",
+    "editor.fontFamily": "Kode Mono, Eingrantch Mono",
     "editor.fontLigatures": true,
     "editor.fontWeight": 500,
-    "editor.fontSize": 11,
-    "terminal.integrated.fontSize": 11,
+    "editor.fontSize": 13,
+    "terminal.integrated.fontSize": 13,
 }
