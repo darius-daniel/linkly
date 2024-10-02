@@ -6,10 +6,10 @@ export default function Row({ data }: { data: Link }) {
   const url = new URL(data?.original_link);
   const { hostname, href } = url;
 
-  const creationDate = data.created_at?.getDate().toString().padStart(1, '0');
+  const creationDate = data.created_at?.getDate().toString().padStart(2, '0');
   const creationMonth =
     data.created_at &&
-    data.created_at?.getMonth().toString().padStart(1, '0') + 1;
+    data.created_at?.getMonth().toString().padStart(2, '0') + 1;
   const creationYear = data.created_at?.getFullYear();
 
   const creationTimeStamp = `${creationDate}-${creationMonth}-${creationYear}`;
