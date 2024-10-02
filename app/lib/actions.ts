@@ -33,12 +33,6 @@ export type State =
   | undefined;
 
 export async function createShortLink(prevState: State, formData: FormData) {
-  console.log(formData.get('url '));
-  // const validatedFields = linkSchema.safeParse(formData);
-
-  // if (!validatedFields.success)
-  //   return { errors: validatedFields.error.flatten().fieldErrors };
-
   const url = formData.get('url');
   if (url) {
     try {
@@ -82,6 +76,7 @@ export async function getLinks(userId: string, currentPage: number) {
     where: { creator_id: userId },
     skip: (currentPage - 1) * maxLinksPerPage,
     take: maxLinksPerPage,
+    orderBy: { created_at: 'asc' },
   });
 }
 

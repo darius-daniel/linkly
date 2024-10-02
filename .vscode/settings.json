@@ -3,5 +3,7 @@
     "editor.fontLigatures": true,
     "editor.fontWeight": 500,
     "editor.fontSize": 13,
-    "terminal.integrated.fontSize": 13,
+    "terminal.integrated.fontFamily": "Sono",
+    "terminal.integrated.fontSize": 14,
+    "terminal.integrated.fontWeight": 500,
 }

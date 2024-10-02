@@ -3,13 +3,20 @@ import { ChevronDown, Copy } from 'lucide-react';
 import Image from 'next/image';
 
 export default function Row({ data }: { data: Link }) {
-  console.log(data.original_link);
-  const domain = new URL(data?.original_link).hostname;
+  const url = new URL(data?.original_link);
+  const { hostname, href } = url;
+
+  const creationDate = data.created_at?.getDate();
+  const creationMonth = data.created_at && data.created_at?.getMonth() + 1;
+  const creationYear = data.created_at?.getFullYear();
+
+  const creationTimeStamp = `${creationDate}-${creationMonth}-${creationYear}`;
+
   return (
     <tr className="flex flex-row items-center justify-between">
       <td className="flex flex-row justify-between items-center p-2 w-full lg:w-1/4">
         <span className="flex flex-row gap-1 items-center">
-          <a href="https://www.twitter.com/tweets/8erelCoihu/" target="_blank">
+          <a href={href} target="_blank">
             {data.short_link.slice(0, 36)}...
           </a>
           <Copy
@@ -28,7 +35,7 @@ export default function Row({ data }: { data: Link }) {
           className="flex flex-row gap-3 items-center"
         >
           <Image
-            src={`https://icons.duckduckgo.com/ip3/${domain}.ico`}
+            src={`https://icons.duckduckgo.com/ip3/${hostname}.ico`}
             alt="Original Link Logo"
             width={32}
             height={32}
@@ -40,9 +47,7 @@ export default function Row({ data }: { data: Link }) {
       <td className="max-lg:hidden w-1/6">
         {data.status ? 'Active' : 'Inactive'}
       </td>
-      <td className="max-lg:hidden w-1/6">
-        {new Date().toISOString().split('T')[0]}
-      </td>
+      <td className="max-lg:hidden w-1/6">{creationTimeStamp}</td>
     </tr>
   );
 }
