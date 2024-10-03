@@ -9,7 +9,7 @@ export default function Row({ data }: { data: Link }) {
   const creationDate = data.created_at?.getDate().toString().padStart(2, '0');
   const creationMonth =
     data.created_at &&
-    data.created_at?.getMonth().toString().padStart(2, '0') + 1;
+    (data.created_at?.getMonth() + 1).toString().padStart(2, '0');
   const creationYear = data.created_at?.getFullYear();
 
   const creationTimeStamp = `${creationDate}-${creationMonth}-${creationYear}`;
