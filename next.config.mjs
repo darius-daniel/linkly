@@ -21,9 +21,9 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'favicon.yandex.com',
+        hostname: 'favicon.yandex.net',
         port: '',
-        pathname: '/favicon',
+        pathname: '/favicon/**',
       },
       {
         protocol: 'https',

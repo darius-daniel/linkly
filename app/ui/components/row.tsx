@@ -5,7 +5,6 @@ import Image from 'next/image';
 export default function Row({ data }: { data: Link }) {
   const url = new URL(data?.original_link);
   const { hostname, href } = url;
-  console.log('Host name: ', hostname);
 
   const creationDate = data.created_at?.getDate().toString().padStart(2, '0');
   const creationMonth =
@@ -38,10 +37,10 @@ export default function Row({ data }: { data: Link }) {
           className="flex flex-row gap-3 items-center"
         >
           <Image
-            src={`https://www.google.com/s2/favicons?domain=${hostname}`}
+            src={`https://favicon.yandex.net/favicon/${hostname}/32x32.png`}
             alt="Original Link Logo"
-            width={24}
-            height={24}
+            width={32}
+            height={32}
           />
           {data.original_link.slice(0, 24)}...
         </a>
