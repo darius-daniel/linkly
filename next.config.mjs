@@ -19,17 +19,14 @@ const nextConfig = {
         port: '',
         pathname: '/avatar/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'favicon.yandex.com',
+        port: '',
+        pathname: '/favicon',
+      },
     ],
   },
-  // async redirects() {
-  //   return [
-  //     {
-  //       source: '/api/auth/callback',
-  //       destination: '/dashboard',
-  //       permanent: true,
-  //     },
-  //   ];
-  // },
 };
 
 export default nextConfig;

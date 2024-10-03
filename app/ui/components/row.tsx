@@ -37,10 +37,10 @@ export default function Row({ data }: { data: Link }) {
           className="flex flex-row gap-3 items-center"
         >
           <Image
-            src={`https://icons.duckduckgo.com/ip3/${hostname}.ico`}
+            src={`https://favicon.yandex.com/favicon/${hostname}.ico`}
             alt="Original Link Logo"
-            width={32}
-            height={32}
+            width={24}
+            height={24}
           />
           {data.original_link.slice(0, 24)}...
         </a>
