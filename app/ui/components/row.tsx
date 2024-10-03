@@ -37,10 +37,10 @@ export default function Row({ data }: { data: Link }) {
           className="flex flex-row gap-3 items-center"
         >
           <Image
-            src={`https://favicon.yandex.net/favicon/${hostname}/32x32.png`}
+            src={`https://favicon.yandex.net/favicon/${hostname}/24x24.png`}
             alt="Original Link Logo"
-            width={32}
-            height={32}
+            width={24}
+            height={24}
           />
           {data.original_link.slice(0, 24)}...
         </a>
