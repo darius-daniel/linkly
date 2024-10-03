@@ -1,6 +1,8 @@
 import { Link } from '@prisma/client';
-import { ChevronDown, Copy } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
+import Clipboard from './clipboard';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 export default function Row({ data }: { data: Link }) {
   const url = new URL(data?.original_link);
@@ -11,8 +13,10 @@ export default function Row({ data }: { data: Link }) {
     data.created_at &&
     (data.created_at?.getMonth() + 1).toString().padStart(2, '0');
   const creationYear = data.created_at?.getFullYear();
-
   const creationTimeStamp = `${creationDate}-${creationMonth}-${creationYear}`;
+
+  const router = useRouter();
+  const currentDomain = process.env.NEXT_PUBLIC_VERCEL_URL || router.basePath;
 
   return (
     <tr className="flex flex-row items-center justify-between">
@@ -21,10 +25,7 @@ export default function Row({ data }: { data: Link }) {
           <a href={href} target="_blank">
             {data.short_link.slice(0, 36)}...
           </a>
-          <Copy
-            size={30}
-            className="p-2 rounded-full bg-custom-gray hover:bg-custom-lite hover:text-custom-dark-gray"
-          />
+          <Clipboard text={`${currentDomain}/${data.short_link}`} />
         </span>
         <ChevronDown
           size={30}
