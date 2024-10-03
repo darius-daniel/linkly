@@ -38,7 +38,7 @@ export default function Row({ data }: { data: Link }) {
           className="flex flex-row gap-3 items-center"
         >
           <Image
-            src={`https://favicon.yandex.com/favicon/${hostname}`}
+            src={`https://www.google.com/s2/favicons?domain=${hostname}`}
             alt="Original Link Logo"
             width={24}
             height={24}
