@@ -28,7 +28,7 @@ export default function LinkInput() {
       />
       <button
         type="submit"
-        className="absolute right-2 top-2 bg-indigo-800 rounded-full p-4 hover:bg-indigo-700"
+        className="absolute right-2 top-1 bg-indigo-800 rounded-full p-3 hover:bg-indigo-700"
       >
         <ArrowRight className="sm:hidden" />
         <span className="max-sm:hidden">Shorten Now!</span>
