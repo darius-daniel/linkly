@@ -2,6 +2,8 @@ import { Link } from '@prisma/client';
 import { ChevronDown } from 'lucide-react';
 import Clipboard from './clipboard';
 import Image from 'next/image';
+import { useState } from 'react';
+import Dropdown from './dropdown';
 
 export default function Row({ data }: { data: Link }) {
   const newUrl = new URL(data?.original_link);
@@ -12,6 +14,8 @@ export default function Row({ data }: { data: Link }) {
     (data.created_at?.getMonth() + 1).toString().padStart(2, '0');
   const creationYear = data.created_at?.getFullYear();
   const creationTimeStamp = `${creationDate}-${creationMonth}-${creationYear}`;
+
+  const [showDropdown, setShowDropdown] = useState<boolean>(false);
 
   return (
     <tr className="flex flex-row items-center justify-between">
@@ -27,7 +31,9 @@ export default function Row({ data }: { data: Link }) {
         <ChevronDown
           size={30}
           className="p-2 rounded-full bg-custom-gray hover:bg-custom-lite hover:text-custom-dark-gray lg:hidden"
+          onClick={() => setShowDropdown(!showDropdown)}
         />
+        {showDropdown && <Dropdown data={data} />}
       </td>
       <td className="max-lg:hidden w-1/4">
         <a
@@ -44,7 +50,11 @@ export default function Row({ data }: { data: Link }) {
         </a>
       </td>
       <td className="max-lg:hidden w-1/6 ps-1">{data.clicks}</td>
-      <td className="max-lg:hidden w-1/6">
+      <td
+        className={
+          'max-lg:hidden w-1/6 ' + data.status ? 'text-success' : 'text-error'
+        }
+      >
         {data.status ? 'Active' : 'Inactive'}
       </td>
       <td className="max-lg:hidden w-1/6">{creationTimeStamp}</td>

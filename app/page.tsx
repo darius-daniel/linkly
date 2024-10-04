@@ -1,17 +1,17 @@
-// import Image from 'next/image';
 import { sfProDisplayBold, sfProDisplayHeavy } from './ui/fonts';
 import Table from './ui/components/table';
 import Header from './ui/components/header';
 import LinkInput from './ui/components/link-input';
 import Link from 'next/link';
-import Head from 'next/head';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Linkly—Shorten Your Long Links',
+};
 
 export default function Home() {
   return (
     <main className="px-5 pb-20 min-w-80">
-      <Head>
-        <title>Linkly—Shorten Your Long Links</title>
-      </Head>
       <Header />
       <section className="pt-20 flex flex-col gap-5 lg:w-3/5 lg:mx-auto">
         <div className="w-4/5 mx-auto">

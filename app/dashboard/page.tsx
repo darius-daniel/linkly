@@ -2,6 +2,7 @@
 
 import { LogOut } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { LogoutLink } from '@kinde-oss/kinde-auth-nextjs/components';
 import { useKindeBrowserClient } from '@kinde-oss/kinde-auth-nextjs';
@@ -12,9 +13,8 @@ import {
 } from '@/app/ui/fonts';
 import LinkInput from '@/app/ui/components/link-input';
 import Table from '@/app/ui/components/table';
-import { createUser } from '../lib/actions';
+import { createUser } from '@/app/lib/actions';
 import { User } from '@prisma/client';
-import Head from 'next/head';
 
 export default function Page() {
   const { isLoading, isAuthenticated } = useKindeBrowserClient();
@@ -33,20 +33,15 @@ export default function Page() {
 
   return (
     <div className="min-h-screen pb-28">
-      <Head>
-        <title>
-          Dashboard—
-          {user?.username
-            ? `${user.username}`
-            : `${user?.given_name} ${user?.family_name}`}
-        </title>
-      </Head>
       <header
         className={`${sfProDisplayHeavy.className} flex flex-row justify-between md:justify-evenly items-center px-2.5 py-2 text-4xl`}
       >
-        <span className="flex-none me-6 bg-gradient-to-r from-custom-pink via-custom-purple via-65% to-custom-blue to-80% bg-clip-text text-transparent">
+        <Link
+          className="flex-none me-6 bg-gradient-to-r from-custom-pink via-custom-purple via-65% to-custom-blue to-80% bg-clip-text text-transparent"
+          href="/"
+        >
           Linkly
-        </span>
+        </Link>
         <div
           className={`${sfProDisplayRegular.className} flex-auto flex flex-row items-center text-base max-md:hidden`}
         >
