@@ -4,8 +4,7 @@ import Clipboard from './clipboard';
 import Image from 'next/image';
 
 export default function Row({ data }: { data: Link }) {
-  const url = new URL(data?.original_link);
-  const { hostname, href } = url;
+  const newUrl = new URL(data?.original_link);
 
   const creationDate = data.created_at?.getDate().toString().padStart(2, '0');
   const creationMonth =
@@ -21,8 +20,8 @@ export default function Row({ data }: { data: Link }) {
     <tr className="flex flex-row items-center justify-between">
       <td className="flex flex-row justify-between items-center p-2 w-full lg:w-1/4">
         <span className="flex flex-row gap-1 items-center">
-          <a href={href} target="_blank">
-            {data.short_link.slice(0, 36)}...
+          <a href={newUrl.href} target="_blank">
+            {data.short_link}
           </a>
           <Clipboard text={`${currentDomain}/${data.short_link}`} />
         </span>
@@ -37,7 +36,7 @@ export default function Row({ data }: { data: Link }) {
           className="flex flex-row gap-3 items-center"
         >
           <Image
-            src={`https://favicon.yandex.net/favicon/${hostname}`}
+            src={`https://favicon.yandex.net/favicon/${newUrl.hostname}`}
             alt="Original Link Logo"
             width={16}
             height={16}
