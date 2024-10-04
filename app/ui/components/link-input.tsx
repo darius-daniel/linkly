@@ -24,7 +24,7 @@ export default function LinkInput() {
         name="url"
         id="url"
         placeholder="Enter the link here"
-        className="rounded-full bg-custom-dark-gray py-5 ps-12 pe-16 w-full border-4 border-custom-gray"
+        className="rounded-full bg-custom-dark-gray py-4 ps-12 pe-16 w-full border-4 border-custom-gray"
       />
       <button
         type="submit"

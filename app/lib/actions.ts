@@ -39,6 +39,7 @@ export async function createShortLink(
 ) {
   if (pathname === '/') {
     redirect('https://linkly-three.vercel.app/api/auth/login?');
+    return;
   }
 
   const url = formData.get('url');

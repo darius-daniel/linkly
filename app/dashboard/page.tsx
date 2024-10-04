@@ -14,6 +14,7 @@ import LinkInput from '@/app/ui/components/link-input';
 import Table from '@/app/ui/components/table';
 import { createUser } from '../lib/actions';
 import { User } from '@prisma/client';
+import Head from 'next/head';
 
 export default function Page() {
   const { isLoading, isAuthenticated } = useKindeBrowserClient();
@@ -32,6 +33,14 @@ export default function Page() {
 
   return (
     <div className="min-h-screen pb-28">
+      <Head>
+        <title>
+          Dashboard—
+          {user?.username
+            ? `${user.username}`
+            : `${user?.given_name} ${user?.family_name}`}
+        </title>
+      </Head>
       <header
         className={`${sfProDisplayHeavy.className} flex flex-row justify-between md:justify-evenly items-center px-2.5 py-2 text-4xl`}
       >
