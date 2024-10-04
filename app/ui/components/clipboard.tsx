@@ -20,7 +20,7 @@ export default function Clipboard({ text }: { text: string }) {
         className="p-2 rounded-full bg-custom-gray hover:bg-custom-lite hover:text-custom-dark-gray"
         onClick={copyToClipboard}
       />
-      {copied && <span className="text-accent">Copied to clipboard</span>}
+      {copied && <span className="text-success">Copied to clipboard</span>}
     </div>
   );
 }

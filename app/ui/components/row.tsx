@@ -2,7 +2,6 @@ import { Link } from '@prisma/client';
 import { ChevronDown } from 'lucide-react';
 import Clipboard from './clipboard';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
 
 export default function Row({ data }: { data: Link }) {
   const url = new URL(data?.original_link);
@@ -15,8 +14,8 @@ export default function Row({ data }: { data: Link }) {
   const creationYear = data.created_at?.getFullYear();
   const creationTimeStamp = `${creationDate}-${creationMonth}-${creationYear}`;
 
-  const router = useRouter();
-  const currentDomain = process.env.NEXT_PUBLIC_VERCEL_URL || router.basePath;
+  const currentDomain =
+    process.env.NEXT_PUBLIC_VERCEL_URL || 'https://linkly-three.vercel.app';
 
   return (
     <tr className="flex flex-row items-center justify-between">
