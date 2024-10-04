@@ -23,7 +23,7 @@ export default function Row({ data }: { data: Link }) {
           <a href={newUrl.href} target="_blank">
             {data.short_link}
           </a>
-          <Clipboard text={`${currentDomain}/${data.short_link}`} />
+          <Clipboard text={`${currentDomain}/short/${data.short_link}`} />
         </span>
         <ChevronDown
           size={30}
