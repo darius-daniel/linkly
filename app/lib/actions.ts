@@ -1,7 +1,7 @@
 'use server';
 
+import { redirect } from 'next/navigation';
 import prisma from './prisma';
-// import { linkSchema } from './zod';
 import { generateRandomString } from './utils';
 import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server';
 
@@ -32,7 +32,15 @@ export type State =
   | { message: string; errors?: undefined }
   | undefined;
 
-export async function createShortLink(prevState: State, formData: FormData) {
+export async function createShortLink(
+  pathname: string,
+  prevState: State,
+  formData: FormData,
+) {
+  if (pathname === '/') {
+    redirect('https://linkly-three.vercel.app/api/auth/login?');
+  }
+
   const url = formData.get('url');
   if (url) {
     try {
@@ -76,7 +84,7 @@ export async function getLinks(userId: string, currentPage: number) {
     where: { creator_id: userId },
     skip: (currentPage - 1) * maxLinksPerPage,
     take: maxLinksPerPage,
-    orderBy: { created_at: 'asc' },
+    orderBy: { created_at: 'desc' },
   });
 }
 

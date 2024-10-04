@@ -25,7 +25,7 @@ export default function Table() {
     <>
       <table className="lg:w-4/5 lg:mx-auto flex flex-col divide-y-4 divide-custom-black gap text-xs text-custom-lite">
         <thead
-          className={`${sfProDisplayBold.className} py-3 px-4 bg-custom-dark-gray rounded-t-2xl`}
+          className={`${sfProDisplayBold.className} py-3 px-4 bg-custom-dark-gray rounded-t-2xl text-sm`}
         >
           <tr className="flex flex-row justify-between">
             <td className="lg:hidden">Shorten Links</td>

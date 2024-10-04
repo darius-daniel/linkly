@@ -13,9 +13,6 @@ export default function Row({ data }: { data: Link }) {
   const creationYear = data.created_at?.getFullYear();
   const creationTimeStamp = `${creationDate}-${creationMonth}-${creationYear}`;
 
-  const currentDomain =
-    process.env.NEXT_PUBLIC_VERCEL_URL || 'https://linkly-three.vercel.app';
-
   return (
     <tr className="flex flex-row items-center justify-between">
       <td className="flex flex-row justify-between items-center p-2 w-full lg:w-1/4">
@@ -23,7 +20,9 @@ export default function Row({ data }: { data: Link }) {
           <a href={newUrl.href} target="_blank">
             {data.short_link}
           </a>
-          <Clipboard text={`${currentDomain}/short/${data.short_link}`} />
+          <Clipboard
+            text={`https://linkly-three.vercel.app/short/${data.short_link}`}
+          />
         </span>
         <ChevronDown
           size={30}

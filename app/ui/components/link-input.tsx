@@ -4,12 +4,17 @@ import { createShortLink } from '@/app/lib/actions';
 import { ArrowRight, Link } from 'lucide-react';
 import { useFormState } from 'react-dom';
 import ErrorToast from './toasts/error';
+import { usePathname } from 'next/navigation';
 
 export default function LinkInput() {
+  const pathname = usePathname();
   const initialState = {
     message: '',
   };
-  const [state, formAction] = useFormState(createShortLink, initialState);
+  const [state, formAction] = useFormState(
+    createShortLink.bind(null, pathname),
+    initialState,
+  );
 
   return (
     <form action={formAction} className="flex flex-row w-full relative">
