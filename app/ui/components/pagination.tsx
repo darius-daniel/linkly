@@ -12,7 +12,7 @@ interface PaginationProps {
   } | null;
   currentPage: {
     value: number;
-    set: Dispatch<SetStateAction<number>>;
+    setValue: Dispatch<SetStateAction<number>>;
   };
 }
 
@@ -32,7 +32,7 @@ export default function Pagination({ currentPage, user }: PaginationProps) {
       <div className="join bg-custom-dark-gray size-fit">
         <button
           className="join-item btn btn-sm bg-inherit"
-          onClick={() => currentPage.set(currentPage.value - 1)}
+          onClick={() => currentPage.setValue(currentPage.value - 1)}
           disabled={currentPage.value - 1 < 1}
         >
           <ChevronsLeft size={16} />
@@ -42,7 +42,7 @@ export default function Pagination({ currentPage, user }: PaginationProps) {
         </button>
         <button
           className="join-item btn btn-sm bg-inherit"
-          onClick={() => currentPage.set(currentPage.value + 1)}
+          onClick={() => currentPage.setValue(currentPage.value + 1)}
           disabled={
             lastPageNum === undefined || currentPage.value + 1 > lastPageNum
           }

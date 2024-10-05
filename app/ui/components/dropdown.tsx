@@ -1,14 +1,34 @@
 import { Link as LinkSchema } from '@prisma/client';
+import { ChevronDown, ChevronUp } from 'lucide-react';
 import Link from 'next/link';
+import { Dispatch, SetStateAction } from 'react';
 
 interface DropdownProps {
   data: LinkSchema;
+  state: {
+    value: boolean;
+    setValue: Dispatch<SetStateAction<boolean>>;
+  };
 }
 
-export default function Dropdown({ data }: DropdownProps) {
+export default function Dropdown({ data, state }: DropdownProps) {
   return (
     <details className="dropdown">
-      <summary className="btn m-1">open or close</summary>
+      <summary className="btn m-1">
+        {state.value ? (
+          <ChevronUp
+            size={30}
+            className="p-2 rounded-full bg-custom-gray hover:bg-custom-lite hover:text-custom-dark-gray lg:hidden"
+            onClick={() => state.setValue(false)}
+          />
+        ) : (
+          <ChevronDown
+            size={30}
+            className="p-2 rounded-full bg-custom-gray hover:bg-custom-lite hover:text-custom-dark-gray lg:hidden"
+            onClick={() => state.setValue(true)}
+          />
+        )}
+      </summary>
       <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
         <li>
           Short Link: <Link href={data.short_link}>{data.short_link}</Link>

@@ -43,7 +43,7 @@ export default function Table() {
         </tbody>
       </table>
       <Pagination
-        currentPage={{ value: currentPage, set: setCurrentPage }}
+        currentPage={{ value: currentPage, setValue: setCurrentPage }}
         user={user}
       />
     </>

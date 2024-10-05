@@ -28,12 +28,13 @@ export default function Row({ data }: { data: Link }) {
             text={`https://linkly-three.vercel.app/short/${data.short_link}`}
           />
         </span>
-        <ChevronDown
-          size={30}
-          className="p-2 rounded-full bg-custom-gray hover:bg-custom-lite hover:text-custom-dark-gray lg:hidden"
-          onClick={() => setShowDropdown(!showDropdown)}
-        />
-        {showDropdown && <Dropdown data={data} />}
+
+        {showDropdown && (
+          <Dropdown
+            data={data}
+            state={{ value: showDropdown, setValue: setShowDropdown }}
+          />
+        )}
       </td>
       <td className="max-lg:hidden w-1/4">
         <a
