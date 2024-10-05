@@ -1,5 +1,4 @@
 import { Link } from '@prisma/client';
-import { ChevronDown } from 'lucide-react';
 import Clipboard from './clipboard';
 import Image from 'next/image';
 import { useState } from 'react';
