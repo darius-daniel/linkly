@@ -51,9 +51,7 @@ export default function Row({ data }: { data: Link }) {
       </td>
       <td className="max-lg:hidden w-1/6 ps-1">{data.clicks}</td>
       <td
-        className={
-          'max-lg:hidden w-1/6 ' + data.status ? 'text-success' : 'text-error'
-        }
+        className={`max-lg:hidden w-1/6 ${data.status ? 'text-success' : 'text-error'}`}
       >
         {data.status ? 'Active' : 'Inactive'}
       </td>
