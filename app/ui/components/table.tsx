@@ -7,19 +7,22 @@ import { getLinks } from '@/app/lib/actions';
 import { useKindeBrowserClient } from '@kinde-oss/kinde-auth-nextjs';
 import { Link } from '@prisma/client';
 import Pagination from './pagination';
+import { dummyData } from '@/app/lib/definitions';
+import { usePathname } from 'next/navigation';
 
 export default function Table() {
   const { user } = useKindeBrowserClient();
+  const pathname = usePathname();
   const [currentPage, setCurrentPage] = useState(1);
-  const [rows, setRows] = useState<Array<Link>>([]);
+  const [rows, setRows] = useState<Array<Link>>(dummyData);
 
   useEffect(() => {
-    if (user) {
+    if (user && pathname === '/dashboard') {
       getLinks(user.id, currentPage).then((rows) => {
         setRows(rows);
       });
     }
-  }, [currentPage, user]);
+  }, [currentPage, user, pathname]);
 
   return (
     <>

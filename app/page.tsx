@@ -39,7 +39,7 @@ export default function Home() {
       </section>
       <section className="relative mt-16 text-custom-lite text-center">
         <Table />
-        <p className="backdrop-blur-sm absolute top-12 left-0 w-full py-6 text-sm">
+        <p className="backdrop-blur-sm absolute bottom-8 left-0 w-full py-4 text-sm">
           <Link
             href="/api/auth/register"
             className="underline text-custom-blue"
