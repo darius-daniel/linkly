@@ -28,12 +28,10 @@ export default function Row({ data }: { data: Link }) {
           />
         </span>
 
-        {showDropdown && (
-          <Dropdown
-            data={data}
-            state={{ value: showDropdown, setValue: setShowDropdown }}
-          />
-        )}
+        <Dropdown
+          data={data}
+          state={{ value: showDropdown, setValue: setShowDropdown }}
+        />
       </td>
       <td className="max-lg:hidden w-1/4">
         <a

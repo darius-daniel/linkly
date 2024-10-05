@@ -12,22 +12,26 @@ interface DropdownProps {
 }
 
 export default function Dropdown({ data, state }: DropdownProps) {
+  const chevronDown = (
+    <ChevronDown
+      size={30}
+      className="p-2 rounded-full bg-custom-gray hover:bg-custom-lite hover:text-custom-dark-gray"
+      onClick={() => state.setValue(true)}
+    />
+  );
+
+  const chevronUp = (
+    <ChevronUp
+      size={30}
+      className="p-2 rounded-full bg-custom-gray hover:bg-custom-lite hover:text-custom-dark-gray"
+      onClick={() => state.setValue(false)}
+    />
+  );
+
   return (
-    <details className="dropdown">
+    <details className="dropdown lg:hidden">
       <summary className="btn m-1">
-        {state.value ? (
-          <ChevronUp
-            size={30}
-            className="p-2 rounded-full bg-custom-gray hover:bg-custom-lite hover:text-custom-dark-gray lg:hidden"
-            onClick={() => state.setValue(false)}
-          />
-        ) : (
-          <ChevronDown
-            size={30}
-            className="p-2 rounded-full bg-custom-gray hover:bg-custom-lite hover:text-custom-dark-gray lg:hidden"
-            onClick={() => state.setValue(true)}
-          />
-        )}
+        {state.value ? chevronUp : chevronDown}
       </summary>
       <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
         <li>
