@@ -14,14 +14,14 @@ export default function Table() {
   const { user } = useKindeBrowserClient();
   const pathname = usePathname();
   const [currentPage, setCurrentPage] = useState(1);
-  const [rows, setRows] = useState<Array<Link>>(dummyData);
+  const [rows, setRows] = useState<Array<Link>>([]);
 
   useEffect(() => {
     if (user && pathname === '/dashboard') {
       getLinks(user.id, currentPage).then((rows) => {
         setRows(rows);
       });
-    }
+    } else setRows(dummyData);
   }, [currentPage, user, pathname]);
 
   return (

@@ -18,7 +18,7 @@ export default function LinkInput() {
 
   return (
     <form action={formAction} className="flex flex-row w-full relative">
-      <Link className="absolute left-6 top-7" size={16} />
+      <Link className="absolute left-6 top-6" size={16} />
       <input
         type="url"
         name="url"
@@ -28,7 +28,7 @@ export default function LinkInput() {
       />
       <button
         type="submit"
-        className="absolute right-2 top-2 bg-indigo-800 rounded-full p-3 hover:bg-indigo-700"
+        className="absolute right-2 top-2 text-custom-lite bg-indigo-800 rounded-full p-3 hover:bg-indigo-700"
       >
         <ArrowRight className="sm:hidden" />
         <span className="max-sm:hidden">Shorten Now!</span>

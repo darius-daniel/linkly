@@ -52,7 +52,7 @@ export default function Page() {
             isLoading ? 'skeleton w-36 h-12 ms-3' : 'dropdown dropdown-end ms-3'
           }
         >
-          <summary className="btn bg-transparent hover:bg-custom-dark-gray hover:text-white size-fit border-0 py-1.5 mx-auto">
+          <summary className="btn bg-transparent text-custom-lite hover:bg-custom-dark-gray hover:text-white size-fit border-0 py-1.5 mx-auto">
             {!isLoading && (
               <Image
                 src={
