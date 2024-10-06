@@ -6,6 +6,8 @@ import { useState } from 'react';
 import Dropdown from './dropdown';
 
 export default function Row({ data }: { data: Link }) {
+  console.log('Row: ', data.short_link);
+
   const newUrl = new URL(data?.original_link);
 
   const creationDate = data.created_at?.getDate().toString().padStart(2, '0');
