@@ -31,17 +31,17 @@ export default function Pagination({ currentPage, user }: PaginationProps) {
     <div className="bg-transparent justify-center mt-1 text-center">
       <div className="join bg-custom-dark-gray size-fit">
         <button
-          className="join-item btn btn-sm bg-inherit text-custom-lite hover:text-custom-dark-gray"
+          className="join-item btn btn-sm bg-inherit text-custom-lite hover:text-custom-dark-gray border-0"
           onClick={() => currentPage.setValue(currentPage.value - 1)}
           disabled={currentPage.value - 1 < 1}
         >
           <ChevronsLeft size={16} />
         </button>
-        <button className="join-item btn btn-sm btn-active bg-custom-dark-gray text-custom-lite">
+        <button className="join-item btn btn-sm btn-active bg-custom-dark-gray text-custom-lite border-0">
           {`Page ${currentPage.value}`}
         </button>
         <button
-          className="join-item btn btn-sm bg-inherit text-custom-lite hover:text-custom-dark-gray"
+          className="join-item btn btn-sm bg-inherit text-custom-lite hover:text-custom-dark-gray border-0"
           onClick={() => currentPage.setValue(currentPage.value + 1)}
           disabled={
             lastPageNum === undefined || currentPage.value + 1 > lastPageNum
