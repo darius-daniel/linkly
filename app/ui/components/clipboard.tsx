@@ -2,14 +2,16 @@ import React, { useState } from 'react';
 import { Check, Copy } from 'lucide-react';
 
 export default function Clipboard({ text }: { text: string }) {
-  console.log('Clipboard: ', text);
   const copyToClipboard = () => {
-    navigator.clipboard.writeText(text).then(() => {
-      setComponent(tick);
-      setTimeout(() => {
-        setComponent(copy);
-      }, 2000);
-    });
+    navigator.clipboard
+      .writeText(text)
+      .then(() => {
+        setComponent(tick);
+        setTimeout(() => {
+          setComponent(copy);
+        }, 2000);
+      })
+      .catch((error: Error) => console.error(error.message));
   };
 
   const copy = (
