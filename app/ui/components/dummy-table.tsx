@@ -1,28 +1,8 @@
-'use client';
-
-import { useEffect, useState } from 'react';
+import { dummyData } from '@/app/lib/definitions';
 import { sfProDisplayBold } from '../fonts';
 import Row from './row';
-import { getLinks } from '@/app/lib/actions';
-import { useKindeBrowserClient } from '@kinde-oss/kinde-auth-nextjs';
-import { Link } from '@prisma/client';
-import Pagination from './pagination';
-import { usePathname } from 'next/navigation';
 
-export default function Table() {
-  const { user } = useKindeBrowserClient();
-  const pathname = usePathname();
-  const [currentPage, setCurrentPage] = useState(1);
-  const [rows, setRows] = useState<Array<Link>>([]);
-
-  useEffect(() => {
-    if (user && pathname === '/dashboard') {
-      getLinks(user.id, currentPage).then((rows) => {
-        setRows(rows);
-      });
-    }
-  }, [currentPage, user, pathname]);
-
+export default function DummyTable() {
   return (
     <>
       <table className="lg:w-4/5 lg:mx-auto flex flex-col divide-y-4 divide-custom-black gap text-xs text-custom-lite">
@@ -39,15 +19,11 @@ export default function Table() {
           </tr>
         </thead>
         <tbody className="flex flex-col divide-y-4 divide-custom-black bg-custom-dark-gray-transparent px-2">
-          {rows.map((row, idx) => (
+          {dummyData.map((row, idx) => (
             <Row data={row} key={idx} />
           ))}
         </tbody>
       </table>
-      <Pagination
-        currentPage={{ value: currentPage, setValue: setCurrentPage }}
-        user={user}
-      />
     </>
   );
 }

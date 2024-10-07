@@ -1,3 +1,5 @@
+'use client';
+
 import { Link } from '@prisma/client';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import Clipboard from './clipboard';

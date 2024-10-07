@@ -1,9 +1,9 @@
 import { sfProDisplayBold, sfProDisplayHeavy } from './ui/fonts';
-import Table from './ui/components/table';
 import Header from './ui/components/header';
 import LinkInput from './ui/components/link-input';
 import Link from 'next/link';
 import { Metadata } from 'next';
+import DummyTable from './ui/components/dummy-table';
 
 export const metadata: Metadata = {
   title: 'Linkly—Shorten Your Long Links',
@@ -38,8 +38,8 @@ export default function Home() {
         </div>
       </section>
       <section className="relative mt-16 text-custom-lite text-center">
-        <Table />
-        <p className="backdrop-blur-sm absolute bottom-8 left-0 w-full py-4 text-sm">
+        <DummyTable />
+        <p className="backdrop-blur-sm absolute bottom-4 left-0 w-full py-4 text-sm">
           <Link
             href="/api/auth/register"
             className="underline text-custom-blue"
