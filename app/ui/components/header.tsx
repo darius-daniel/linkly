@@ -13,7 +13,7 @@ export default function Header() {
         Linkly
       </span>
       <button
-        className={`${sfProDisplaySemiBold.className} text-xl bg-custom-dark-gray px-6 pt-2 pb-3 rounded-full border border-custom-gray hover:bg-custom-gray`}
+        className={`${sfProDisplaySemiBold.className} text-xl bg-custom-dark-gray px-6 py-2.5 rounded-full border border-custom-gray hover:bg-custom-gray`}
         // onClick={() => router.push('/authenticate')}
       >
         <LoginLink>

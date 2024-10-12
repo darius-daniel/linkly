@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
       where: { short_link: shortlink },
       data: { clicks: { increment: 1 } },
     });
-    href = url ? url.original_link : '/';
+    href = url && url.status ? url.original_link : '/';
   } catch (error) {
     console.error(error);
     return NextResponse.json({ message: 'An error occurred', status: 500 });
