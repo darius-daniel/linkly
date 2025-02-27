@@ -12,16 +12,13 @@ export default function Header() {
       <span className="bg-gradient-to-r from-custom-pink via-custom-purple via-65% to-custom-blue to-80% bg-clip-text text-transparent">
         Linkly
       </span>
-      <button
-        className={`${sfProDisplaySemiBold.className} text-xl bg-custom-dark-gray px-6 py-2.5 rounded-full border border-custom-gray hover:bg-custom-gray`}
-        // onClick={() => router.push('/authenticate')}
+      <LoginLink
+        className={`${sfProDisplaySemiBold.className} btn btn-outline text-xl bg-custom-dark-gray hover:bg-custom-blue hover:text-white rounded-full`}
       >
-        <LoginLink>
-          <span className="flex flex-row gap-2 items-center">
-            Login <LogIn />
-          </span>
-        </LoginLink>
-      </button>
+        <span className="flex flex-row gap-2 items-center">
+          Login <LogIn />
+        </span>
+      </LoginLink>
     </header>
   );
 }
