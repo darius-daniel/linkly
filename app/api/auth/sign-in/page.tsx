@@ -1,7 +1,67 @@
+'use client';
+
+import Image from 'next/image';
+import Link from 'next/link';
+
 export default function SignIn() {
   return (
-    <form>
-      <h1>Login</h1>
-    </form>
+    <div className="flex flex-col gap-2 justify-center align-center mx-auto py-10">
+      <a
+        href="/"
+        className="bg-gradient-to-r from-custom-pink via-custom-purple via-65% to-custom-blue to-80% bg-clip-text text-transparent self-center mb-4 text-4xl font-bold"
+      >
+        Linkly
+      </a>
+
+      <p className="self-center text-3xl font-bold">Sign in to your account</p>
+      <form className="flex flex-col gap-2 justify-center align-center w-[400px] p-10 pt-2 mx-auto text-sm">
+        <label htmlFor="last-name" className="flex flex-col gap-2">
+          Email:
+          <input
+            type="email"
+            placeholder="Email address"
+            className="input input-bordered w-full max-w-xs bg-custom-dark-gray-transparent focus:border-custom-blue focus:outline-0 text-sm"
+            id="email"
+            required
+          />
+        </label>
+        <label htmlFor="last-name" className="flex flex-col gap-2">
+          Password:
+          <input
+            type="password"
+            placeholder="Enter your password"
+            className="input input-bordered w-full max-w-xs bg-custom-dark-gray-transparent focus:border-custom-blue focus:outline-0 text-sm"
+            id="password"
+            required
+          />
+        </label>
+
+        <button
+          type="submit"
+          className="btn bg-custom-blue text-white text-base font-normal disabled:bg-blue-900 hover:bg-blue-900 mt-4"
+        >
+          Sign up
+        </button>
+
+        <div className="divider">Or continue with</div>
+
+        <a
+          href="/"
+          className="btn bg-custom-dark-gray text-base font-normal hover:bg-custom-blue hover:text-white"
+        >
+          <Image src="/google.svg" alt="Google Logo" width={24} height={24} />
+          Google
+        </a>
+      </form>
+      <p className="self-center">
+        Already have an account?{' '}
+        <Link
+          href="/api/auth/sign-up"
+          className="text-custom-blue font-bold hover:underline"
+        >
+          Sign in
+        </Link>
+      </p>
+    </div>
   );
 }

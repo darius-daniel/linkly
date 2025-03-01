@@ -15,7 +15,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={sfProDisplayRegular.className}>{children}</body>
+      <body
+        className={`${sfProDisplayRegular.className} min-h-screen min-w-screen`}
+      >
+        {children}
+      </body>
     </html>
   );
 }

@@ -23,8 +23,10 @@ model User {
 
   links Link[]
 
-  created_at DateTime? @default(now())
-  updated_at DateTime? @updatedAt
+  created_at    DateTime?       @default(now())
+  updated_at    DateTime?       @updatedAt
+  Session       Session[]
+  PasswordReset PasswordReset[]
 }
 
 model Link {
@@ -39,4 +41,22 @@ model Link {
 
   created_at DateTime? @default(now())
   updated_at DateTime? @updatedAt
+}
+
+model Session {
+  id            String    @id @default(cuid())
+  user          User      @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id       String
+  session_token String
+  created_at    DateTime? @default(now())
+  expires_at    DateTime?
+}
+
+model PasswordReset {
+  id          String    @id @default(cuid())
+  user        User      @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id     String
+  reset_token String
+  created_at  DateTime? @default(now())
+  expires_at  DateTime?
 }

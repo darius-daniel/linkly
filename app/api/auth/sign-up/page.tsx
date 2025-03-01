@@ -9,7 +9,7 @@ export default function SignUp() {
   const [confirmPassword, setConfirmPassword] = useState('');
 
   return (
-    <div className="flex flex-col gap-2 justify-center align-center mx-auto py-10">
+    <div className="flex flex-col gap-2 justify-center align-center py-10 mx-auto">
       <a
         href="/"
         className="bg-gradient-to-r from-custom-pink via-custom-purple via-65% to-custom-blue to-80% bg-clip-text text-transparent self-center mb-4 text-4xl font-bold"
@@ -74,20 +74,23 @@ export default function SignUp() {
           Sign up
         </button>
 
-        <div className="divider">Or sign up with</div>
+        <div className="divider">Or continue with</div>
 
-        <div className="btn bg-custom-dark-gray text-base font-normal hover:bg-custom-blue hover:text-white">
+        <a
+          href="/"
+          className="btn bg-custom-dark-gray text-base font-normal hover:bg-custom-blue hover:text-white"
+        >
           <Image src="/google.svg" alt="Google Logo" width={24} height={24} />
           Google
-        </div>
+        </a>
       </form>
       <p className="self-center">
-        Already have an account?{' '}
+        Yet to register with us?{' '}
         <Link
-          href="/auth/sign-in"
-          className="text-custom-blue font-bold hover:text-blue-900"
+          href="/api/auth/sign-up"
+          className="text-custom-blue font-bold hover:underline"
         >
-          Sign in
+          Sign up
         </Link>
       </p>
     </div>

@@ -19,11 +19,11 @@ export default function LinkInput() {
   return (
     <form action={formAction} className="flex flex-row w-full relative">
       <Link className="absolute left-4 top-4" size={16} />
-      <label className="input input-bordered flex items-center w-full ps-12 rounded-full">
+      <label className="input input-bordered focus:border focus:border-custom-blue hover:outline-none flex items-center w-full ps-12 rounded-full relative">
         <input type="text" className="grow" placeholder="Enter your link" />
         <button
           type="submit"
-          className="btn bg-custom-blue hover:bg-custom-dark-gray opacity-70 text-nowrap rounded-full text-white"
+          className="btn bg-custom-blue hover:bg-blue-900 opacity-70 text-nowrap rounded-full text-white relative left-4"
         >
           <span className="hidden lg:block">Shorten Link</span>
           <ArrowRight className="lg:hidden" />
