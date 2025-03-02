@@ -15,48 +15,59 @@ datasource db {
 }
 
 model User {
-  id       String  @id @default(cuid())
-  name     String
-  email    String  @unique
-  password String
-  avatar   String?
+  id          String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name        String
+  email       String  @unique @db.Text
+  password    String
+  avatar      String?
+  is_verified Boolean @default(false)
 
-  links Link[]
+  links           Link[]
+  sessions        Session[]
+  password_resets PasswordReset[]
 
-  created_at    DateTime?       @default(now())
-  updated_at    DateTime?       @updatedAt
-  Session       Session[]
-  PasswordReset PasswordReset[]
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@index([email])
 }
 
 model Link {
-  id            String  @id @default(cuid())
-  short_link    String  @unique
+  id            String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  short_link    String  @unique @db.Text
   original_link String
-  clicks        Int
-  status        Boolean @default(true)
+  clicks        Int     @default(0)
+  is_active     Boolean @default(true)
 
   creator    User   @relation(fields: [creator_id], references: [id], onDelete: Cascade)
-  creator_id String
+  creator_id String @db.Uuid
 
-  created_at DateTime? @default(now())
-  updated_at DateTime? @updatedAt
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@index([short_link])
 }
 
 model Session {
-  id            String    @id @default(cuid())
-  user          User      @relation(fields: [user_id], references: [id], onDelete: Cascade)
-  user_id       String
-  session_token String
-  created_at    DateTime? @default(now())
-  expires_at    DateTime?
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+
+  user    User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id String @db.Uuid
+  session_token String  @unique @db.Text
+
+  created_at DateTime @default(now())
+  expires_at DateTime
+
+  @@index([user_id])
 }
 
 model PasswordReset {
-  id          String    @id @default(cuid())
-  user        User      @relation(fields: [user_id], references: [id], onDelete: Cascade)
-  user_id     String
-  reset_token String
-  created_at  DateTime? @default(now())
-  expires_at  DateTime?
+  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user        User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id     String   @db.Uuid
+  reset_token String   @unique
+  created_at  DateTime @default(now())
+  expires_at  DateTime
+
+  @@index([user_id, expires_at])
 }

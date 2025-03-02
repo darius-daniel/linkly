@@ -2,13 +2,14 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { sfProDisplayBold } from '@/app/ui/fonts'
 
 export default function SignIn() {
   return (
     <div className="flex flex-col gap-2 justify-center align-center mx-auto py-10">
       <a
         href="/"
-        className="bg-gradient-to-r from-custom-pink via-custom-purple via-65% to-custom-blue to-80% bg-clip-text text-transparent self-center mb-4 text-4xl font-bold"
+        className={`${sfProDisplayBold.className} bg-gradient-to-r from-custom-pink via-custom-purple via-65% to-custom-blue to-80% bg-clip-text text-transparent self-center mb-4 text-4xl`}
       >
         Linkly
       </a>

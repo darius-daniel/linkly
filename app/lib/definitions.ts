@@ -21,7 +21,7 @@ export const dummyData: Array<Link> = [
     short_link: 'cdfdad89',
     original_link: 'https://www.google.com',
     clicks: 1023,
-    status: true,
+    is_active: true,
     creator_id: '1',
     created_at: new Date(),
     updated_at: new Date(),
@@ -31,7 +31,7 @@ export const dummyData: Array<Link> = [
     short_link: 'jjdieqej',
     original_link: 'https://www.facebook.com',
     clicks: 9933,
-    status: true,
+    is_active: true,
     creator_id: '1',
     created_at: new Date(),
     updated_at: new Date(),
@@ -41,7 +41,7 @@ export const dummyData: Array<Link> = [
     short_link: 'q212weds',
     original_link: 'https://www.twitter.com',
     clicks: 23,
-    status: false,
+    is_active: false,
     creator_id: '1',
     created_at: new Date(),
     updated_at: new Date(),
@@ -51,7 +51,7 @@ export const dummyData: Array<Link> = [
     short_link: 'b3dadg9s',
     original_link: 'https://www.twitter.com/tweets/8erelCoihu/',
     clicks: 1213,
-    status: true,
+    is_active: true,
     creator_id: '1',
     created_at: new Date(),
     updated_at: new Date(),
@@ -61,7 +61,7 @@ export const dummyData: Array<Link> = [
     short_link: 'q212weds',
     original_link: 'https://www.youtube.com/watch?v=8J7ZmH0lXuk',
     clicks: 4183,
-    status: true,
+    is_active: true,
     creator_id: '1',
     created_at: new Date(),
     updated_at: new Date(),
@@ -71,7 +71,7 @@ export const dummyData: Array<Link> = [
     short_link: 'q212weds',
     original_link: 'https://www.adventuresinwanderlust.com/',
     clicks: 243,
-    status: true,
+    is_active: true,
     creator_id: '1',
     created_at: new Date(),
     updated_at: new Date(),
@@ -81,7 +81,7 @@ export const dummyData: Array<Link> = [
     short_link: 'q212weds',
     original_link: 'https://vimeo.com/625257654',
     clicks: 32123,
-    status: true,
+    is_active: true,
     creator_id: '1',
     created_at: new Date(),
     updated_at: new Date(),
@@ -91,7 +91,7 @@ export const dummyData: Array<Link> = [
     short_link: 'q212weds',
     original_link: 'https://unsplash.com/photos/2KjNwOzFfVQ',
     clicks: 538,
-    status: true,
+    is_active: true,
     creator_id: '1',
     created_at: new Date(),
     updated_at: new Date(),
@@ -101,26 +101,28 @@ export const dummyData: Array<Link> = [
     short_link: 'q212weds',
     original_link: 'https://www.twitter.com',
     clicks: 23,
-    status: true,
+    is_active: true,
     creator_id: '1',
     created_at: new Date(),
     updated_at: new Date(),
   },
 ];
 
-export type State =
-  | { errors: { url?: string[] | undefined }; message?: undefined }
-  | { message: string; errors?: undefined }
-  | undefined;
+export type SignUpFormState =
+  | {
+    errors?: {
+      name?: string[]
+      email?: string[]
+      password?: string[]
+    }
+    message?: string
+  }
+  | undefined
 
 export const SignUpFormSchema = z.object({
-  firstName: z
+  name: z
     .string()
-    .min(3, { message: 'First name must be at least 2 characters long' })
-    .trim(),
-  lastName: z
-    .string()
-    .min(3, { message: 'Last name must be at least 2 characters long' })
+    .min(2, { message: 'Last name must be at least 2 characters long' })
     .trim(),
   email: z
     .string()
