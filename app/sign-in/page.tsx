@@ -2,9 +2,13 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { signIn } from '@/app/lib/actions';
 import { sfProDisplayBold } from '@/app/ui/fonts'
+import { useActionState } from 'react';
 
 export default function SignIn() {
+  const [state, formAction] = useActionState(signIn, undefined);
+
   return (
     <div className="flex flex-col gap-2 justify-center align-center mx-auto py-10">
       <a
@@ -15,7 +19,7 @@ export default function SignIn() {
       </a>
 
       <p className="self-center text-3xl font-bold">Sign in to your account</p>
-      <form className="flex flex-col gap-2 justify-center align-center w-[400px] p-10 pt-2 mx-auto text-sm">
+      <form className="flex flex-col gap-2 justify-center align-center w-[400px] p-10 pt-2 mx-auto text-sm" action={formAction}>
         <label htmlFor="last-name" className="flex flex-col gap-2">
           Email:
           <input
@@ -23,8 +27,12 @@ export default function SignIn() {
             placeholder="Email address"
             className="input input-bordered w-full max-w-xs bg-custom-dark-gray-transparent focus:border-custom-blue focus:outline-0 text-sm"
             id="email"
+            name='email'
             required
           />
+          {state?.errors?.email && (
+            <p className="text-custom-pink">{state.errors.email}</p>
+          )}
         </label>
         <label htmlFor="last-name" className="flex flex-col gap-2">
           Password:
@@ -33,8 +41,12 @@ export default function SignIn() {
             placeholder="Enter your password"
             className="input input-bordered w-full max-w-xs bg-custom-dark-gray-transparent focus:border-custom-blue focus:outline-0 text-sm"
             id="password"
+            name='password'
             required
           />
+          {state?.errors?.password && (
+            <p className="text-custom-pink">{state.errors.password}</p>
+          )}
         </label>
 
         <button
@@ -55,12 +67,12 @@ export default function SignIn() {
         </a>
       </form>
       <p className="self-center">
-        Already have an account?{' '}
+        Don't have an account?{' '}
         <Link
           href="/api/auth/sign-up"
           className="text-custom-blue font-bold hover:underline"
         >
-          Sign in
+          Sign up
         </Link>
       </p>
     </div>

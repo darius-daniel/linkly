@@ -117,29 +117,44 @@ export type SignUpFormState =
     }
     message?: string
   }
-  | undefined
+  | undefined;
+
+export type SignInFormState =
+  | {
+    errors?: {
+      email?: string[]
+      password?: string[]
+    }
+    message?: string
+  }
+  | undefined;
 
 export const SignUpFormSchema = z.object({
   name: z
     .string()
-    .min(2, { message: 'Last name must be at least 2 characters long' })
+    .min(2, { message: 'Must be at least 2 characters long.' })
     .trim(),
   email: z
     .string()
-    .email({ message: 'Please enter a valid email address' })
+    .email({ message: 'Must be a valid email address.' })
     .trim(),
   password: z
     .string()
-    .min(8, { message: 'Password should be at least 8 characters long' })
+    .min(8, { message: 'Must be at least 8 characters long.' })
     .regex(/[a-z]/, {
-      message: 'Password must contain at least one lowercase letter.',
+      message: 'Must contain at least one lowercase letter.',
     })
     .regex(/[A-Z]/, {
-      message: 'Password must contain at least one uppercase letter',
+      message: 'Must contain at least one uppercase letter.',
     })
-    .regex(/[0-9]/, { message: 'Password must contain at least one number.' })
+    .regex(/[0-9]/, { message: 'Must contain at least one number.' })
     .regex(/[^a-zA-Z0-9]/, {
-      message: 'Password must contain at least one special character',
+      message: 'Must contain at least one special character.',
     })
     .trim(),
 });
+
+export const SignInFormSchema = z.object({
+  email: z.string().email({ message: "Must be a valid email" }).trim(),
+  password: z.string().min(1, { message: "Cannot be empty" }).trim()
+})

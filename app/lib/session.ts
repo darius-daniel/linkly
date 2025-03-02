@@ -25,6 +25,7 @@ export async function decrypt(session: string | undefined = '') {
     return payload
   } catch (error) {
     console.log('Failed to verify session')
+    return null
   }
 }
 
@@ -37,7 +38,7 @@ export async function createSession(user: User) {
     data: {
       user_id: user.id,
       expires_at: expiresAt,
-      session_token: nanoid(64),
+      session_token: nanoid(32),
     }
   })
 
@@ -54,7 +55,7 @@ export async function createSession(user: User) {
     httpOnly: true,
     secure: true,
     expires: expiresAt,
-    sameSite: 'lax',
+    sameSite: 'strict',
     path: '/',
   })
 }

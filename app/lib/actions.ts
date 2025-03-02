@@ -2,9 +2,9 @@
 
 import prisma from './prisma';
 import { generateRandomString } from './utils';
-import { SignUpFormSchema, SignUpFormState } from './definitions';
+import { SignInFormSchema, SignInFormState, SignUpFormSchema, SignUpFormState } from './definitions';
 import bcrypt from 'bcryptjs';
-import { createSession } from './session';
+import { createSession, updateSession } from './session';
 import { redirect } from 'next/navigation';
 
 export async function signUp(prevState: SignUpFormState, formData: FormData) {
@@ -25,15 +25,13 @@ export async function signUp(prevState: SignUpFormState, formData: FormData) {
     const passwordHash = await bcrypt.hash(password, saltLength);
 
 
-    const user = await prisma.$transaction(async (tx) => {
-      return await prisma.user.create({
-        data: {
-          name,
-          password: passwordHash,
-          email,
-        },
-      });
-    })
+    const user = await prisma.user.create({
+      data: {
+        name,
+        password: passwordHash,
+        email,
+      },
+    });
 
     await createSession(user);
     return redirect('/dashboard');
@@ -44,6 +42,37 @@ export async function signUp(prevState: SignUpFormState, formData: FormData) {
 
     console.error("Sign up error:", error);
     return { message: 'Signing up failed!' };
+  }
+}
+
+export async function signIn(prevState: SignInFormState, formData: FormData) {
+  const validatedFields = SignInFormSchema.safeParse({
+    email: formData.get('email'),
+    password: formData.get('password')
+  })
+
+  if (!validatedFields.success) {
+    return { errors: validatedFields.error.flatten().fieldErrors }
+  }
+
+  const { email, password } = validatedFields.data;
+  try {
+    const user = await prisma.user.findUnique({ where: { email } })
+
+    if (!user) {
+      return { errors: { email: ["Invalid email or password"] } }
+    }
+
+    const isPasswordCorrect = await bcrypt.compare(password, user.password);
+    if (!isPasswordCorrect) {
+      return { errors: { password: ["Invalid email or password"] } }
+    }
+
+    await createSession(user);
+    return redirect('/dashboard')
+  } catch (error: any) {
+    console.error("Sign in error:", error);
+    return { message: "Sign in failed! Please try again later." }
   }
 }
 
