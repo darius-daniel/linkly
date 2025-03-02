@@ -1,8 +1,10 @@
 {
-    "editor.fontFamily": "Kode Mono, Eingrantch Mono",
+    "editor.fontFamily": "SF Mono, Eingrantch Mono",
     "editor.fontLigatures": true,
     "editor.fontWeight": 400,
     "editor.fontSize": 12,
+    "editor.lineHeight": 1.8,
+    "editor.formatOnSave": false,
     "terminal.integrated.letterSpacing": 1,
     "terminal.integrated.fontSize": 12,
     "terminal.integrated.fontWeight": 500,
