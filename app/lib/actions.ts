@@ -24,18 +24,25 @@ export async function signUp(prevState: SignUpFormState, formData: FormData) {
     const saltLength = 10;
     const passwordHash = await bcrypt.hash(password, saltLength);
 
-    const user = await prisma.user.create({
-      data: {
-        name,
-        password: passwordHash,
-        email,
-      },
-    });
+
+    const user = await prisma.$transaction(async (tx) => {
+      return await prisma.user.create({
+        data: {
+          name,
+          password: passwordHash,
+          email,
+        },
+      });
+    })
 
     await createSession(user);
     return redirect('/dashboard');
-  } catch (error) {
-    console.error(error);
+  } catch (error: any) {
+    if (error?.code === 'P2002') {
+      return { errors: { email: ["Email is already taken"] } }
+    }
+
+    console.error("Sign up error:", error);
     return { message: 'Signing up failed!' };
   }
 }

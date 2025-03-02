@@ -106,12 +106,12 @@ export default function SignUp() {
         </a>
       </form>
       <p className="self-center">
-        Don't have an account?{' '}
+        Already have an account?{' '}
         <Link
-          href="/api/auth/sign-up"
+          href="/api/auth/sign-in"
           className="text-custom-blue font-bold hover:underline"
         >
-          Sign up
+          Sign in
         </Link>
       </p>
     </div>
