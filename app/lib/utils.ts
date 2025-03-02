@@ -1,3 +1,6 @@
+import prisma from "@/app/lib/prisma";
+import { nanoid } from "nanoid";
+
 export function generateRandomString(length = 8) {
   const charSet =
     'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';

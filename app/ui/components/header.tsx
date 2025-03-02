@@ -1,8 +1,8 @@
 'use client';
 
 import { LogIn } from 'lucide-react';
-import { LoginLink } from '@kinde-oss/kinde-auth-nextjs/components';
 import { sfProDisplayHeavy, sfProDisplaySemiBold } from '../fonts';
+import Link from 'next/link';
 
 export default function Header() {
   return (
@@ -12,16 +12,12 @@ export default function Header() {
       <span className="bg-gradient-to-r from-custom-pink via-custom-purple via-65% to-custom-blue to-80% bg-clip-text text-transparent">
         Linkly
       </span>
-      <button
-        className={`${sfProDisplaySemiBold.className} text-xl bg-custom-dark-gray px-6 py-2.5 rounded-full border border-custom-gray hover:bg-custom-gray`}
-        // onClick={() => router.push('/authenticate')}
+      <Link
+        href="/api/auth/sign-in"
+        className={`btn ${sfProDisplaySemiBold.className} btn text-xl bg-custom-dark-gray text-white hover:bg-custom-blue hover:text-white border border-white rounded-full`}
       >
-        <LoginLink>
-          <span className="flex flex-row gap-2 items-center">
-            Login <LogIn />
-          </span>
-        </LoginLink>
-      </button>
+        Login <LogIn />
+      </Link>
     </header>
   );
 }

@@ -10,45 +10,64 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
-  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+  url      = env("DATABASE_URL") // uses connection pooling
+  // directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
 model User {
-  id                   String  @id @default(cuid())
-  family_name          String?
-  given_name           String?
-  phone_number         String?
-  username             String?
-  email                String? @unique
-  picture              String?
+  id          String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name        String
+  email       String  @unique @db.Text
+  password    String
+  avatar      String?
+  is_verified Boolean @default(false)
 
-  usr_city             String?
-  usr_industry         String?
-  usr_job_title        String?
-  usr_middle_name      String?
-  usr_postcode         String?
-  usr_salutation       String?
-  usr_state_region     String?
-  usr_street_address   String?
-  usr_street_address_2 String?
+  links           Link[]
+  sessions        Session[]
+  password_resets PasswordReset[]
 
-  links                Link[]
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
-  created_at           DateTime? @default(now())
-  updated_at           DateTime? @updatedAt
+  @@index([email])
 }
 
 model Link {
-  id            String   @id @default(cuid())
-  short_link    String   @unique
+  id            String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  short_link    String  @unique @db.Text
   original_link String
-  clicks        Int
-  status        Boolean  @default(true)
+  clicks        Int     @default(0)
+  is_active     Boolean @default(true)
 
-  creator       User     @relation(fields: [creator_id], references: [id], onDelete: Cascade)
-  creator_id    String
+  creator    User   @relation(fields: [creator_id], references: [id], onDelete: Cascade)
+  creator_id String @db.Uuid
 
-  created_at    DateTime? @default(now())
-  updated_at    DateTime? @updatedAt
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@index([short_link])
+}
+
+model Session {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+
+  user    User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id String @db.Uuid
+  session_token String  @unique @db.Text
+
+  created_at DateTime @default(now())
+  expires_at DateTime
+
+  @@index([user_id])
+}
+
+model PasswordReset {
+  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user        User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user_id     String   @db.Uuid
+  reset_token String   @unique
+  created_at  DateTime @default(now())
+  expires_at  DateTime
+
+  @@index([user_id, expires_at])
 }

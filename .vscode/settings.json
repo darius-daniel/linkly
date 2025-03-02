@@ -1,11 +1,12 @@
 {
-    "editor.fontFamily": "SF Mono, Eingrantch Mono",
+    "editor.fontFamily": "SF Mono, Jetbrains Mono, Eingrantch Mono",
     "editor.fontLigatures": true,
-    "editor.fontWeight": 400,
+    "editor.fontWeight": 500,
     "editor.fontSize": 12,
     "editor.lineHeight": 1.8,
-    "editor.formatOnSave": false,
+    "editor.formatOnSave": true,
     "terminal.integrated.letterSpacing": 1,
     "terminal.integrated.fontSize": 12,
     "terminal.integrated.fontWeight": 500,
+    "workbench.colorTheme": "Min Dark",
 }
