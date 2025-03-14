@@ -1,49 +1,50 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { sfProDisplayBold } from '../fonts';
 import Row from './row';
-import { getLinks } from '@/app/lib/actions';
-import { useKindeBrowserClient } from '@kinde-oss/kinde-auth-nextjs';
-import { Link } from '@prisma/client';
+import { getLinks, getUser } from '@/app/lib/actions';
+import { Link, User } from '@prisma/client';
 import Pagination from './pagination';
-import { usePathname } from 'next/navigation';
+import { usePathname } from 'next/navigation';  
 
 export default function Table() {
-  const { user } = useKindeBrowserClient();
+  const [user, setUser] = useState<User | null>(null);
   const pathname = usePathname();
+  const userId = pathname.split('/')[2];
   const [currentPage, setCurrentPage] = useState(1);
   const [rows, setRows] = useState<Array<Link>>([]);
 
   useEffect(() => {
-    if (user && pathname === '/dashboard') {
-      getLinks(user.id, currentPage).then((rows) => {
+    getUser(userId).then((user) => {
+      setUser(user);
+    });
+    
+    if (user && pathname.startsWith('/dashboard')) {
+      getLinks(userId, currentPage).then((rows) => {
         setRows(rows);
       });
     }
-  }, [currentPage, user, pathname]);
+  }, [currentPage, user, userId, pathname]);
 
   return (
     <>
-      <table className="lg:w-4/5 lg:mx-auto flex flex-col divide-y-4 divide-custom-black gap text-xs text-custom-lite">
-        <thead
-          className={`${sfProDisplayBold.className} py-3 px-4 bg-custom-dark-gray rounded-t-2xl text-sm`}
-        >
-          <tr className="flex flex-row justify-between">
-            <td className="lg:hidden">Shorten Links</td>
-            <td className="max-lg:hidden w-1/4">Short Link</td>
-            <td className="max-lg:hidden w-1/4">Original Link</td>
-            <td className="max-lg:hidden w-1/6">Clicks</td>
-            <td className="max-lg:hidden w-1/6">Status</td>
-            <td className="max-lg:hidden w-1/6">Date</td>
-          </tr>
-        </thead>
-        <tbody className="flex flex-col divide-y-4 divide-custom-black bg-custom-dark-gray-transparent px-2">
-          {rows.map((row, idx) => (
-            <Row data={row} key={idx} />
-          ))}
-        </tbody>
-      </table>
+      <div className="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Short Link</th>
+              <th>Original Link</th>
+              <th>Clicks</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((row, idx) => (
+              <Row data={row} key={idx} />
+            ))}
+          </tbody>
+        </table>
+      </div>
       <Pagination
         currentPage={{ value: currentPage, setValue: setCurrentPage }}
         user={user}

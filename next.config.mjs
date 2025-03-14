@@ -31,6 +31,11 @@ const nextConfig = {
         port: '',
         pathname: '/s2/favicons',
       },
+      {
+        protocol: 'https',
+        hostname: 'img.daisyui.com',
+        pathname: '/images/stock/**'
+      }
     ],
   },
 };

@@ -13,7 +13,7 @@ export default function Header() {
         Linkly
       </span>
       <Link
-        href="/api/auth/sign-in"
+        href="/sign-in"
         className={`btn ${sfProDisplaySemiBold.className} btn text-xl bg-custom-dark-gray text-white hover:bg-custom-blue hover:text-white border border-white rounded-full`}
       >
         Login <LogIn />

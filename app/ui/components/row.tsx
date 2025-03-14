@@ -10,13 +10,6 @@ import Dropdown from './dropdown';
 export default function Row({ data }: { data: Link }) {
   const newUrl = new URL(data?.original_link);
 
-  const creationDate = data.created_at?.getDate().toString().padStart(2, '0');
-  const creationMonth =
-    data.created_at &&
-    (data.created_at?.getMonth() + 1).toString().padStart(2, '0');
-  const creationYear = data.created_at?.getFullYear();
-  const creationTimeStamp = `${creationDate}-${creationMonth}-${creationYear}`;
-
   const [showDropdown, setShowDropdown] = useState<boolean>(false);
 
   return (
@@ -64,11 +57,10 @@ export default function Row({ data }: { data: Link }) {
         </td>
         <td className="max-lg:hidden w-1/6 ps-1">{data.clicks}</td>
         <td
-          className={`max-lg:hidden w-1/6 ${data.status ? 'text-success' : 'text-error'}`}
+          className={`max-lg:hidden w-1/6 ${data.is_active ? 'text-success' : 'text-error'}`}
         >
-          {data.status ? 'Active' : 'Inactive'}
+          {data.is_active ? 'Active' : 'Inactive'}
         </td>
-        <td className="max-lg:hidden w-1/6">{creationTimeStamp}</td>
       </tr>
     </>
   );

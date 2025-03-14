@@ -129,6 +129,15 @@ export type SignInFormState =
   }
   | undefined;
 
+export type CreateShortLinkState = 
+  | {
+    errors?: {
+      url?: string[]
+    }
+    message?: string
+  }
+  | undefined;
+
 export const SignUpFormSchema = z.object({
   name: z
     .string()
@@ -157,4 +166,8 @@ export const SignUpFormSchema = z.object({
 export const SignInFormSchema = z.object({
   email: z.string().email({ message: "Must be a valid email" }).trim(),
   password: z.string().min(1, { message: "Cannot be empty" }).trim()
+})
+
+export const CreateShortLinkSchema = z.object({
+  url: z.string().url({ message: "Must be a valid URL" }).trim(),
 })

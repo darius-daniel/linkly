@@ -2,10 +2,18 @@
 
 import prisma from './prisma';
 import { generateRandomString } from './utils';
-import { SignInFormSchema, SignInFormState, SignUpFormSchema, SignUpFormState } from './definitions';
+import { CreateShortLinkSchema, CreateShortLinkState, SignInFormSchema, SignInFormState, SignUpFormSchema, SignUpFormState } from './definitions';
 import bcrypt from 'bcryptjs';
-import { createSession, updateSession } from './session';
+import { createSession } from './session';
 import { redirect } from 'next/navigation';
+
+export async function getUser(userId: string) {
+  return prisma.user.findUnique({
+    where: {
+      id: userId,
+    },
+  });
+}
 
 export async function signUp(prevState: SignUpFormState, formData: FormData) {
   const validatedFields = SignUpFormSchema.safeParse({
@@ -34,7 +42,7 @@ export async function signUp(prevState: SignUpFormState, formData: FormData) {
     });
 
     await createSession(user);
-    return redirect('/dashboard');
+    return redirect(`/dashboard/${user.id}`);
   } catch (error: any) {
     if (error?.code === 'P2002') {
       return { errors: { email: ["Email is already taken"] } }
@@ -69,18 +77,51 @@ export async function signIn(prevState: SignInFormState, formData: FormData) {
     }
 
     await createSession(user);
-    return redirect('/dashboard')
+    return redirect(`/dashboard/${user.id}`)
   } catch (error: any) {
+    if (error.digest && error.digest.startsWith('NEXT_REDIRECT')) {
+      const [, , url] = error.digest.split('/');
+      return redirect(`/dashboard/${url}`);
+    }
     console.error("Sign in error:", error);
     return { message: "Sign in failed! Please try again later." }
   }
 }
 
+
 export async function createShortLink(
   pathname: string,
-  prevState: SignUpFormState,
+  prevState: CreateShortLinkState,
   formData: FormData,
-) { }
+) {
+  const validatedFields = CreateShortLinkSchema.safeParse({
+    url: formData.get('url'),
+  });
+
+  if (!validatedFields.success) {
+    return { error: validatedFields.error.flatten().fieldErrors };
+  }
+
+  const { url } = validatedFields.data;
+  try {
+    const user = await prisma.user.findUnique({ where: { id: pathname.split('/')[2] } });
+    if (!user) {
+      return { errors: { url: ["User not found"] } };
+    }
+
+    await prisma.link.create({
+      data: {
+        original_link: url,
+        short_link: generateRandomString(6),
+        creator_id: user.id,
+      },
+    });
+    return { message: "Short link created successfully" };
+  } catch (error) {
+    console.error("Create short link error:", error);
+    return { errors: { url: ["Failed to create short link"] } };
+  }
+}
 
 // export async function deleteShortLink(formData: FormData) {}
 
