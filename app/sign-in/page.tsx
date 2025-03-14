@@ -53,7 +53,7 @@ export default function SignIn() {
           type="submit"
           className="btn bg-custom-blue text-white text-base font-normal disabled:bg-blue-900 hover:bg-blue-900 mt-4"
         >
-          Sign up
+          Sign in
         </button>
 
         <div className="divider">Or continue with</div>
@@ -67,9 +67,9 @@ export default function SignIn() {
         </a>
       </form>
       <p className="self-center">
-        Don't have an account?{' '}
+        Don&apos;t have an account?{' '}
         <Link
-          href="/api/auth/sign-up"
+          href="/sign-up"
           className="text-custom-blue font-bold hover:underline"
         >
           Sign up

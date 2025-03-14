@@ -26,8 +26,8 @@ export default function Dropdown({ data }: DropdownProps) {
       </p>
       <p>
         <span className="font-bold text-info">Status:</span>{' '}
-        <span className={`${data.status ? 'text-success' : 'text-error'}`}>
-          {data.status ? 'Active' : 'Inactive'}
+        <span className={`${data.is_active ? 'text-success' : 'text-error'}`}>
+          {data.is_active ? 'Active' : 'Inactive'}
         </span>
       </p>
       <p>

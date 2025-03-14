@@ -11,7 +11,7 @@ export default function SignUp() {
   const [confirmPassword, setConfirmPassword] = useState('');
 
   const initialState = { message: '' };
-  const [state, formAction, pending] = useActionState(signUp, initialState);
+  const [state, formAction] = useActionState(signUp, initialState);
 
   return (
     <div className="flex flex-col gap-2 justify-center align-center py-10 mx-auto">
