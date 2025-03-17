@@ -23,7 +23,7 @@ export default async function Home() {
             streamlines your online experience.
           </p>
         </div>
-        <LinkInput userId={user?.id} />
+        <LinkInput user={user} />
         <div className="w-4/5 mx-auto text-center text-custom-lite text-sm leading-5">
           <p className={`${sfProDisplayBold.className}`}>
             You can create <span className="text-custom-pink">05</span> more
