@@ -65,25 +65,28 @@ export async function signIn(prevState: SignInFormState, formData: FormData) {
 
   const { email, password } = validatedFields.data;
   try {
+    console.log('[SignIn] Attempting to find user:', email);
     const user = await prisma.user.findUnique({ where: { email } })
 
     if (!user) {
+      console.log('[SignIn] User not found');
       return { errors: { email: ["Invalid email or password"] } }
     }
 
+    console.log('[SignIn] User found, verifying password');
     const isPasswordCorrect = await bcrypt.compare(password, user.password);
     if (!isPasswordCorrect) {
+      console.log('[SignIn] Password incorrect');
       return { errors: { password: ["Invalid email or password"] } }
     }
 
+    console.log('[SignIn] Password correct, creating session');
     await createSession(user);
-    return redirect(`/dashboard/${user.id}`)
+    console.log('[SignIn] Session created, redirecting to:', `/dashboard/${user.id}`);
+    const redirectUrl = `/dashboard/${user.id}`;
+    return redirect(redirectUrl);
   } catch (error: any) {
-    if (error.digest && error.digest.startsWith('NEXT_REDIRECT')) {
-      const [, , url] = error.digest.split('/');
-      return redirect(`/dashboard/${url}`);
-    }
-    console.error("Sign in error:", error);
+    console.error("[SignIn] Error during sign in:", error);
     return { message: "Sign in failed! Please try again later." }
   }
 }

@@ -33,32 +33,43 @@ export async function decrypt(session: string | undefined = '') {
 export async function createSession(user: User) {
   const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
 
-  // 1. Create a session in the database
-  const newSession = await prisma.session.create({
-    data: {
-      user_id: user.id,
-      expires_at: expiresAt,
-      session_token: nanoid(32),
-    }
-  })
+  try {
+    console.log('[CreateSession] Creating database session for user:', user.id);
+    // 1. Create a session in the database
+    const newSession = await prisma.session.create({
+      data: {
+        user_id: user.id,
+        expires_at: expiresAt,
+        session_token: nanoid(32),
+      }
+    })
+    console.log('[CreateSession] Database session created');
 
-  // 2. Encrypt the session ID
-  const encryptedSession = await encrypt({
-    userId: newSession.user_id,
-    sessionId: newSession.session_token,
-    expiresAt: newSession.expires_at
-  })
+    // 2. Encrypt the session ID
+    console.log('[CreateSession] Encrypting session');
+    const encryptedSession = await encrypt({
+      userId: newSession.user_id,
+      sessionId: newSession.session_token,
+      expiresAt: newSession.expires_at
+    })
+    console.log('[CreateSession] Session encrypted');
 
-  // 3. Store the session in cookies for optimistic auth checks
-  const cookieStore = await cookies();
+    // 3. Store the session in cookies for optimistic auth checks
+    console.log('[CreateSession] Setting cookie');
+    const cookieStore = await cookies();
 
-  cookieStore.set('linklySession', encryptedSession, {
-    httpOnly: true,
-    secure: true,
-    expires: expiresAt,
-    sameSite: 'strict',
-    path: '/',
-  })
+    cookieStore.set('linklySession', encryptedSession, {
+      httpOnly: true,
+      secure: true,
+      expires: expiresAt,
+      sameSite: 'strict',
+      path: '/',
+    })
+    console.log('[CreateSession] Cookie set successfully');
+  } catch (error) {
+    console.error('[CreateSession] Error creating session:', error);
+    throw error; // Re-throw to be caught by the calling function
+  }
 }
 
 export async function updateSession() {
