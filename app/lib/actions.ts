@@ -41,7 +41,7 @@ export async function signUp(prevState: SignUpFormState, formData: FormData) {
     });
 
     await createSession(user);
-    redirect(`/dashboard/${user.id}`);
+    redirect('/dashboard');
   } catch (error: any) {
     if (error?.code === 'P2002') {
       return { errors: { email: ["Email is already taken"] } }
@@ -81,7 +81,7 @@ export async function signIn(prevState: SignInFormState, formData: FormData) {
     }
 
     await createSession(user);
-    redirect(`/dashboard/${user.id}`);
+    redirect('/dashboard');
   } catch (error: any) {
     if (error?.digest?.startsWith('NEXT_REDIRECT')) {
       throw error;

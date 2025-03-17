@@ -6,11 +6,11 @@ import { getLinks, getUser } from '@/app/lib/actions';
 import { Link, User } from '@prisma/client';
 import Pagination from './pagination';
 import { usePathname } from 'next/navigation';  
+import { TableProps } from './types';
 
-export default function Table() {
+export default function Table({ userId }: TableProps) {
   const [user, setUser] = useState<User | null>(null);
   const pathname = usePathname();
-  const userId = pathname.split('/')[2];
   const [currentPage, setCurrentPage] = useState(1);
   const [rows, setRows] = useState<Array<Link>>([]);
 

@@ -4,10 +4,10 @@ import { createShortLink } from '@/app/lib/actions';
 import { ArrowRight, Link } from 'lucide-react';
 import { useActionState } from 'react';
 import { usePathname } from 'next/navigation';
+import { LinkInputProps } from './types';
 
-export default function LinkInput() {
+export default function LinkInput({ userId }: LinkInputProps) {
   const pathname = usePathname();
-  const userId = pathname.split('/')[2];
   const initialState = {
     message: '',
   };
