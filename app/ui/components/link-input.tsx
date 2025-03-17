@@ -5,12 +5,12 @@ import { ArrowRight, Link } from 'lucide-react';
 import { useActionState } from 'react';
 import { LinkInputProps } from './types';
 
-export default function LinkInput({ userId }: LinkInputProps) {
+export default function LinkInput({ user }: LinkInputProps) {
   const initialState = {
     message: '',
   };
   const [state, formAction] = useActionState(
-    createShortLink.bind(null, userId),
+    createShortLink.bind(null, user.id),
     initialState,
   );
 

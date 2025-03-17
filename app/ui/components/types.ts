@@ -1,14 +1,20 @@
 import { Link } from "@prisma/client";
 import { Dispatch, SetStateAction } from "react";
 
+export type AuthenticatedUser = {
+  id: string;
+  name: string;
+  email: string;
+  avatar: string | null;
+};
+
 export interface LinkInputProps {
-  userId?: string;
+  user: AuthenticatedUser;
 }
 
 export interface TableProps {
-  userId: string;
+  user: AuthenticatedUser;
 }
-
 
 export type SignUpFormState =
   | {

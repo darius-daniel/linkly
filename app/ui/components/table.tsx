@@ -2,27 +2,22 @@
 
 import { useEffect, useState } from 'react';
 import Row from './row';
-import { getLinks, getUser } from '@/app/lib/actions';
-import { Link, User } from '@prisma/client';
+import { getLinks } from '@/app/lib/actions';
+import { Link } from '@prisma/client';
 import Pagination from './pagination';
 import { TableProps } from './types';
 
-export default function Table({ userId }: TableProps) {
-  const [user, setUser] = useState<User | null>(null);
+export default function Table({ user }: TableProps) {
   const [currentPage, setCurrentPage] = useState(1);
   const [rows, setRows] = useState<Array<Link>>([]);
 
   useEffect(() => {
-    getUser(userId).then((user) => {
-      setUser(user);
-    });
-    
     if (user) {
-      getLinks(userId, currentPage).then((rows) => {
+      getLinks(user.id, currentPage).then((rows) => {
         setRows(rows);
       });
     }
-  }, [currentPage, user, userId]);
+  }, [currentPage, user]);
 
   return (
     <>

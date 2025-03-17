@@ -1,10 +1,10 @@
 import { getShortLinkLastPageNum } from '@/app/lib/actions';
-import { User } from '@prisma/client';
+import { AuthenticatedUser } from './types';
 import { ChevronsLeft, ChevronsRight } from 'lucide-react';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
 interface PaginationProps {
-  user: User | null;
+  user: AuthenticatedUser | null;
   currentPage: {
     value: number;
     setValue: Dispatch<SetStateAction<number>>;

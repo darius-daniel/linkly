@@ -17,7 +17,7 @@ export default async function DashboardPage() {
         </div>
         <div className="flex gap-2">
           <div className="hidden md:block">
-            <LinkInput userId={user.id} />
+            <LinkInput user={user} />
           </div>
           <div className="dropdown dropdown-end">
             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
@@ -46,10 +46,10 @@ export default async function DashboardPage() {
       </div>
       <section className="mt-28 flex flex-col gap-5 mx-auto">
         <div className="md:hidden w-4/5 mx-auto">
-          <LinkInput userId={user.id} />
+          <LinkInput user={user} />
         </div>
         <div className="mt-10 mx-auto w-11/12 md:5/6">
-          <Table userId={user.id} />
+          <Table user={user} />
         </div>
       </section>
     </div>
