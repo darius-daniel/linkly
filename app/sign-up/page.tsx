@@ -108,7 +108,7 @@ export default function SignUp() {
       <p className="self-center">
         Already have an account?{' '}
         <Link
-          href="/api/auth/sign-in"
+          href="/sign-in"
           className="text-custom-blue font-bold hover:underline"
         >
           Sign in
