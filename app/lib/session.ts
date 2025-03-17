@@ -19,12 +19,24 @@ export async function encrypt(payload: JWTPayload) {
 
 export async function decrypt(session: string | undefined = '') {
   try {
+    if (!process.env.SESSION_SECRET) {
+      console.error('[Decrypt] SESSION_SECRET is not set');
+      return null;
+    }
+    
+    if (!session) {
+      console.log('[Decrypt] No session provided');
+      return null;
+    }
+
     const { payload } = await jwtVerify(session, encodedKey, {
       algorithms: ['HS256'],
     })
     return payload
   } catch (error) {
-    console.log('Failed to verify session')
+    console.error('[Decrypt] Failed to verify session:', error);
+    console.error('[Decrypt] Session string length:', session?.length);
+    console.error('[Decrypt] First 50 chars of session:', session?.substring(0, 50));
     return null
   }
 }
@@ -60,15 +72,15 @@ export async function createSession(user: User) {
 
     cookieStore.set('linklySession', encryptedSession, {
       httpOnly: true,
-      secure: true,
+      secure: process.env.NODE_ENV === 'production',
       expires: expiresAt,
-      sameSite: 'strict',
+      sameSite: 'lax', 
       path: '/',
     })
     console.log('[CreateSession] Cookie set successfully');
   } catch (error) {
     console.error('[CreateSession] Error creating session:', error);
-    throw error; // Re-throw to be caught by the calling function
+    throw error; 
   }
 }
 
@@ -85,9 +97,9 @@ export async function updateSession() {
 
   cookieStore.set('linklySession', session, {
     httpOnly: true,
-    secure: true,
+    secure: process.env.NODE_ENV === 'production',
     expires: expires,
-    sameSite: 'lax',
+    sameSite: 'lax', 
     path: '/',
   })
 }
