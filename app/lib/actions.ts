@@ -32,7 +32,6 @@ export async function signUp(prevState: SignUpFormState, formData: FormData) {
     const saltLength = 10;
     const passwordHash = await bcrypt.hash(password, saltLength);
 
-
     const user = await prisma.user.create({
       data: {
         name,
@@ -42,10 +41,15 @@ export async function signUp(prevState: SignUpFormState, formData: FormData) {
     });
 
     await createSession(user);
-    return redirect(`/dashboard/${user.id}`);
+    redirect(`/dashboard/${user.id}`);
   } catch (error: any) {
     if (error?.code === 'P2002') {
       return { errors: { email: ["Email is already taken"] } }
+    }
+    
+    // Handle Next.js redirect "error"
+    if (error?.digest?.startsWith('NEXT_REDIRECT')) {
+      throw error; // Let Next.js handle the redirect
     }
 
     console.error("Sign up error:", error);
@@ -83,9 +87,13 @@ export async function signIn(prevState: SignInFormState, formData: FormData) {
     console.log('[SignIn] Password correct, creating session');
     await createSession(user);
     console.log('[SignIn] Session created, redirecting to:', `/dashboard/${user.id}`);
-    const redirectUrl = `/dashboard/${user.id}`;
-    return redirect(redirectUrl);
+    redirect(`/dashboard/${user.id}`);
   } catch (error: any) {
+    // Handle Next.js redirect "error"
+    if (error?.digest?.startsWith('NEXT_REDIRECT')) {
+      throw error; // Let Next.js handle the redirect
+    }
+
     console.error("[SignIn] Error during sign in:", error);
     return { message: "Sign in failed! Please try again later." }
   }
