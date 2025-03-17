@@ -6,7 +6,10 @@ import { nanoid } from 'nanoid';
 import 'server-only'
 import { JWTPayload, SignJWT, jwtVerify } from 'jose'
 
-const secretKey = process.env.SESSION_SECRET
+const secretKey = process.env.SESSION_SECRET;
+if (!secretKey || secretKey.length === 0) {
+  throw new Error('SESSION_SECRET environment variable is not set or is empty');
+}
 const encodedKey = new TextEncoder().encode(secretKey)
 
 export async function encrypt(payload: JWTPayload) {
