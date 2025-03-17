@@ -5,12 +5,10 @@ import Row from './row';
 import { getLinks, getUser } from '@/app/lib/actions';
 import { Link, User } from '@prisma/client';
 import Pagination from './pagination';
-import { usePathname } from 'next/navigation';  
 import { TableProps } from './types';
 
 export default function Table({ userId }: TableProps) {
   const [user, setUser] = useState<User | null>(null);
-  const pathname = usePathname();
   const [currentPage, setCurrentPage] = useState(1);
   const [rows, setRows] = useState<Array<Link>>([]);
 
@@ -19,12 +17,12 @@ export default function Table({ userId }: TableProps) {
       setUser(user);
     });
     
-    if (user && pathname.startsWith('/dashboard')) {
+    if (user) {
       getLinks(userId, currentPage).then((rows) => {
         setRows(rows);
       });
     }
-  }, [currentPage, user, userId, pathname]);
+  }, [currentPage, user, userId]);
 
   return (
     <>

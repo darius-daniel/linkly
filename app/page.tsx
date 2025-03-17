@@ -3,8 +3,11 @@ import Header from './ui/components/header';
 import LinkInput from './ui/components/link-input';
 import Link from 'next/link';
 import DummyTable from './ui/components/dummy-table';
+import { getAuthenticatedUser } from './lib/auth';
 
-export default function Home() {
+export default async function Home() {
+  const user = await getAuthenticatedUser();
+
   return (
     <main className="px-5 pb-20 min-w-80">
       <Header />
@@ -20,7 +23,7 @@ export default function Home() {
             streamlines your online experience.
           </p>
         </div>
-        <LinkInput />
+        <LinkInput userId={user?.id} />
         <div className="w-4/5 mx-auto text-center text-custom-lite text-sm leading-5">
           <p className={`${sfProDisplayBold.className}`}>
             You can create <span className="text-custom-pink">05</span> more

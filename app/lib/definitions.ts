@@ -1,19 +1,5 @@
 import { Link } from '@prisma/client';
-import { Dispatch, SetStateAction } from 'react';
 import { z } from 'zod';
-
-export interface TableProps {
-  data?: Array<Link>;
-}
-
-export interface RowProps {
-  data: Link;
-}
-
-export type Page = {
-  value: number;
-  setValue: Dispatch<SetStateAction<number>>;
-};
 
 export const dummyData: Array<Link> = [
   {
@@ -107,36 +93,6 @@ export const dummyData: Array<Link> = [
     updated_at: new Date(),
   },
 ];
-
-export type SignUpFormState =
-  | {
-    errors?: {
-      name?: string[]
-      email?: string[]
-      password?: string[]
-    }
-    message?: string
-  }
-  | undefined;
-
-export type SignInFormState =
-  | {
-    errors?: {
-      email?: string[]
-      password?: string[]
-    }
-    message?: string
-  }
-  | undefined;
-
-export type CreateShortLinkState = 
-  | {
-    errors?: {
-      url?: string[]
-    }
-    message?: string
-  }
-  | undefined;
 
 export const SignUpFormSchema = z.object({
   name: z

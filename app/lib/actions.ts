@@ -2,10 +2,11 @@
 
 import prisma from './prisma';
 import { generateRandomString } from './utils';
-import { CreateShortLinkSchema, CreateShortLinkState, SignInFormSchema, SignInFormState, SignUpFormSchema, SignUpFormState } from './definitions';
+import { CreateShortLinkSchema, SignInFormSchema, SignUpFormSchema } from './definitions';
 import bcrypt from 'bcryptjs';
 import { createSession } from './session';
 import { redirect } from 'next/navigation';
+import { SignUpFormState, SignInFormState, CreateShortLinkState } from '@/app/ui/components/types';
 
 export async function getUser(userId: string) {
   return prisma.user.findUnique({
@@ -92,12 +93,15 @@ export async function signIn(prevState: SignInFormState, formData: FormData) {
   }
 }
 
-
 export async function createShortLink(
-  pathname: string,
+  userId: string | undefined,
   prevState: CreateShortLinkState,
   formData: FormData,
 ) {
+  if (!userId) {
+    redirect('/sign-in');
+  }
+
   const validatedFields = CreateShortLinkSchema.safeParse({
     url: formData.get('url'),
   });
@@ -108,7 +112,7 @@ export async function createShortLink(
 
   const { url } = validatedFields.data;
   try {
-    const user = await prisma.user.findUnique({ where: { id: pathname.split('/')[2] } });
+    const user = await prisma.user.findUnique({ where: { id: userId } });
     if (!user) {
       return { errors: { url: ["User not found"] } };
     }
