@@ -21,7 +21,7 @@ export default function Table({ user }: TableProps) {
 
   return (
     <>
-      <div className="overflow-x-auto rounded-box border border-base-content bg-base-100">
+      <div className="overflow-x-auto rounded-box bg-base-100">
         <table className="table">
           <thead>
             <tr>
