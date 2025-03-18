@@ -1,3 +1,5 @@
+'use client'
+
 import { Link } from '@prisma/client';
 import Clipboard from './clipboard';
 import Image from 'next/image';
