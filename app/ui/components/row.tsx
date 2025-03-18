@@ -1,16 +1,9 @@
-'use client';
-
 import { Link } from '@prisma/client';
-import { ChevronDown, ChevronUp } from 'lucide-react';
 import Clipboard from './clipboard';
 import Image from 'next/image';
-import { useState } from 'react';
-import Dropdown from './dropdown';
 
 export default function Row({ data }: { data: Link }) {
   const newUrl = new URL(data?.original_link);
-
-  const [showDropdown, setShowDropdown] = useState<boolean>(false);
 
   return (
     <>
@@ -24,24 +17,9 @@ export default function Row({ data }: { data: Link }) {
               text={`https://linkly-three.vercel.app/short/${data.short_link}`}
             />
           </span>
-
-          {showDropdown ? (
-            <ChevronUp
-              size={30}
-              className="p-2 rounded-full bg-custom-gray hover:bg-custom-lite hover:text-custom-dark-gray lg:hidden"
-              onClick={() => setShowDropdown(false)}
-            />
-          ) : (
-            <ChevronDown
-              size={30}
-              className="p-2 rounded-full bg-custom-gray hover:bg-custom-lite hover:text-custom-dark-gray lg:hidden"
-              onClick={() => setShowDropdown(true)}
-            />
-          )}
         </td>
-        {showDropdown && <Dropdown data={data} />}
 
-        <td className="max-lg:hidden">
+        <td>
           <a
             href={data.original_link}
             className="flex flex-row gap-3 items-center"
@@ -52,7 +30,7 @@ export default function Row({ data }: { data: Link }) {
               width={16}
               height={16}
             />
-            {data.original_link.slice(0, 24)}...
+            {data.original_link.slice(0, 12)}...
           </a>
         </td>
         <td className="max-lg:hidden ps-1">{data.clicks}</td>
