@@ -26,9 +26,9 @@ export default function LinkInput({ user }: LinkInputProps) {
           <span className="hidden lg:block">Shorten Link</span>
           <ArrowRight className="lg:hidden" />
         </button>
+        {state?.error && <p className="text-custom-pink text-sm">{state.error.url}</p>}
+        {state?.message && <p className="text-custom-pink text-sm">{state.message}</p>}
       </label>
-      {state?.error && <p>{state.error.url}</p>}
-      {state?.message && <p>{state.message}</p>}
     </form>
   );
 }

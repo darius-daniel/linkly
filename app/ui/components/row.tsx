@@ -15,7 +15,7 @@ export default function Row({ data }: { data: Link }) {
   return (
     <>
       <tr className="flex flex-col lg:flex-row items-center justify-between">
-        <td className="flex flex-row justify-between items-center p-2 w-full lg:w-1/4">
+        <td className="flex flex-row justify-between items-center p-2 w-full">
           <span className="flex flex-row gap-1 items-center">
             <a href={newUrl.href} target="_blank">
               {data.short_link}
@@ -41,7 +41,7 @@ export default function Row({ data }: { data: Link }) {
         </td>
         {showDropdown && <Dropdown data={data} />}
 
-        <td className="max-lg:hidden w-1/4">
+        <td className="max-lg:hidden">
           <a
             href={data.original_link}
             className="flex flex-row gap-3 items-center"
@@ -55,9 +55,9 @@ export default function Row({ data }: { data: Link }) {
             {data.original_link.slice(0, 24)}...
           </a>
         </td>
-        <td className="max-lg:hidden w-1/6 ps-1">{data.clicks}</td>
+        <td className="max-lg:hidden ps-1">{data.clicks}</td>
         <td
-          className={`max-lg:hidden w-1/6 ${data.is_active ? 'text-success' : 'text-error'}`}
+          className={`max-lg:hidden ${data.is_active ? 'text-success' : 'text-error'}`}
         >
           {data.is_active ? 'Active' : 'Inactive'}
         </td>
