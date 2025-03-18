@@ -9,7 +9,7 @@ export default function Row({ data }: { data: Link }) {
 
   return (
     <>
-      <tr className="text-xs text-base-100">
+      <tr className="text-xs">
         <td className="flex flex-row justify-between items-center p-2">
           <span className="flex flex-row gap-1 items-center">
             <a href={newUrl.href} target="_blank">
@@ -35,7 +35,7 @@ export default function Row({ data }: { data: Link }) {
             {data.original_link.slice(0, 12)}...
           </a>
         </td>
-        <td className="ps-1">{data.clicks}</td>
+        <td className="text-left">{data.clicks}</td>
         <td
           className={`${data.is_active ? 'text-success' : 'text-error'}`}
         >
