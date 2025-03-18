@@ -9,8 +9,8 @@ export default function Row({ data }: { data: Link }) {
 
   return (
     <>
-      <tr className="flex flex-col lg:flex-row items-center justify-between">
-        <td className="flex flex-row justify-between items-center p-2 w-full">
+      <tr>
+        <td className="flex flex-row justify-between items-center p-2">
           <span className="flex flex-row gap-1 items-center">
             <a href={newUrl.href} target="_blank">
               {data.short_link}
@@ -35,9 +35,9 @@ export default function Row({ data }: { data: Link }) {
             {data.original_link.slice(0, 12)}...
           </a>
         </td>
-        <td className="max-lg:hidden ps-1">{data.clicks}</td>
+        <td className="ps-1">{data.clicks}</td>
         <td
-          className={`max-lg:hidden ${data.is_active ? 'text-success' : 'text-error'}`}
+          className={`${data.is_active ? 'text-success' : 'text-error'}`}
         >
           {data.is_active ? 'Active' : 'Inactive'}
         </td>
