@@ -4,7 +4,6 @@ import LinkInput from './ui/components/link-input';
 import Link from 'next/link';
 import DummyTable from './ui/components/dummy-table';
 import { getAuthenticatedUser } from './lib/auth';
-import { Table } from 'lucide-react';
 
 export default async function Home() {
   const user = await getAuthenticatedUser();
@@ -37,8 +36,7 @@ export default async function Home() {
         </div>
       </section>
       <section className="relative mt-16 text-custom-lite text-center">
-        <DummyTable />git add .
-        git commit -m "refactor: streamline table components and middleware"
+        <DummyTable />
         <p className="backdrop-blur-sm absolute bottom-1 left-0 w-full py-4 text-sm">
           <Link
             href="/api/auth/register"
