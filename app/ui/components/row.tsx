@@ -9,7 +9,7 @@ export default function Row({ data }: { data: Link }) {
 
   return (
     <>
-      <tr>
+      <tr className="text-xs text-base-100">
         <td className="flex flex-row justify-between items-center p-2">
           <span className="flex flex-row gap-1 items-center">
             <a href={newUrl.href} target="_blank">
