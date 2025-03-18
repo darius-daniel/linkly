@@ -35,7 +35,7 @@ export default function Row({ data }: { data: Link }) {
             {data.original_link.slice(0, 12)}...
           </a>
         </td>
-        <td className="text-right">{data.clicks}</td>
+        <td>{data.clicks}</td>
         <td
           className={`${data.is_active ? 'text-success' : 'text-error'}`}
         >

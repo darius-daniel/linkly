@@ -9,7 +9,6 @@ const publicRoutes = ['/sign-in', '/sign-up', '/']
 export default async function middleware(req: NextRequest) {
   // 2. Check if the current route is protected or public
   const path = req.nextUrl.pathname
-  const userId = path.split('/')[2]
   const isProtectedRoute = protectedRoutes.includes(path)
   const isPublicRoute = publicRoutes.includes(path)
  
@@ -36,5 +35,5 @@ export default async function middleware(req: NextRequest) {
  
 // Routes Middleware should not run on
 export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|.*\\.png$).*)'],
+  matcher: ['/'],
 }
