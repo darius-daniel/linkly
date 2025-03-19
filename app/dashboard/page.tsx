@@ -3,6 +3,7 @@ import LinkInput from '@/app/ui/components/link-input';
 import Table from '@/app/ui/components/table';
 import Image from 'next/image';
 import { getAuthenticatedUser } from '@/app/lib/auth';
+import Link from 'next/link';
 
 export default async function DashboardPage() {
   const user = await getAuthenticatedUser();
@@ -39,7 +40,7 @@ export default async function DashboardPage() {
                 </a>
               </li>
               <li><a>Settings</a></li>
-              <li><a>Logout</a></li>
+              <li><Link href="/dashboard/logout">Logout</Link></li>
             </ul>
           </div>
         </div>
